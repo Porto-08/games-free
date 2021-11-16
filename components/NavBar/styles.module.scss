@@ -1,0 +1,52 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: var(--tertiary-color);
+  padding: 0 20px;
+
+  .navBar {
+    list-style: none;
+
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    padding: 1rem 0;
+    gap: 6rem;
+
+    li {
+      color: var(--secondary-color);
+      font-size: clamp(1rem, 1.5vw, 1.25rem);
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      transition: color 0.3s ease-in-out;
+
+      &:hover {
+        color: var(--hover-color);
+      }
+
+      &::after {
+        content: "";
+        display: block;
+        width: 0;
+        height: 1px;
+        background-color: var(--hover-color);
+        transition: width 0.2s ease-in-out;
+      }
+
+      &:hover::after {
+        width: 100%;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .container {
+    
+    .navBar {
+      gap: 2.5rem;
+    }
+  }
+}
