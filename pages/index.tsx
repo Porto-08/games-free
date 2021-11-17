@@ -3,6 +3,7 @@ import Head from "next/head";
 import Image from "next/image";
 import styles from "./styles.module.scss";
 import gamesIllustration from "../assets/svg/games.svg";
+import Card from "../components/Card";
 
 const Home: NextPage = () => {
   return (
@@ -32,6 +33,38 @@ const Home: NextPage = () => {
         <div className={styles.illustration}>
           <Image src={gamesIllustration} height={500} width={500} />
         </div>
+      </section>
+
+      <section className={styles.content}>
+        <h2>Populares</h2>
+
+        <section className={styles.cards}>
+          <Card
+            thumbnail="https://www.freetogame.com/g/1/thumbnail.jpg"
+            id={1}
+            short_description="A free-to-play, co-op action RPG with gameplay similar to Monster Hunter."
+          />
+          <Card
+            thumbnail="https://www.freetogame.com/g/2/thumbnail.jpg"
+            id={1}
+            short_description="If you like blowing up tanks, with a quick and intense game style you will love this game!"
+          />
+          <Card
+            thumbnail="https://www.freetogame.com/g/1/thumbnail.jpg"
+            id={1}
+            short_description="A free-to-play, co-op action RPG with gameplay similar to Monster Hunter."
+          />
+          <Card
+            thumbnail="https://www.freetogame.com/g/1/thumbnail.jpg"
+            id={1}
+            short_description="A free-to-play, co-op action RPG with gameplay similar to Monster Hunter."
+          />
+          <Card
+            thumbnail="https://www.freetogame.com/g/1/thumbnail.jpg"
+            id={1}
+            short_description="A free-to-play, co-op action RPG with gameplay similar to Monster Hunter."
+          />
+        </section>
       </section>
     </div>
   );
