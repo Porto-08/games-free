@@ -2,6 +2,7 @@ import "../styles/globals.scss";
 import NavBar from "../components/NavBar";
 import type { AppProps } from "next/app";
 import Head from "next/head";
+import Footer from "../components/Footer";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -21,6 +22,8 @@ function MyApp({ Component, pageProps }: AppProps) {
         <div className="content">
           <Component {...pageProps} />
         </div>
+
+        <Footer />
       </div>
     </>
   );

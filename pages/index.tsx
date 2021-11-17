@@ -22,9 +22,7 @@ interface ICardsFetch {
   freetogame_profile_url: string;
 }
 
-interface ICardsFetch extends Array<any> {}
-
-const Home: NextPage = ({ release, relevance }: ICardsFetch[]) => {
+const Home = ({ release, relevance }: ICardsFetch[]) => {
   const responsive = {
     desktop: {
       breakpoint: { max: 9999, min: 1024 },
