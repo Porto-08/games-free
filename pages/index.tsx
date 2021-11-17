@@ -1,4 +1,4 @@
-import type { GetStaticProps, NextPage } from "next";
+import type { GetStaticProps, InferGetStaticPropsType, NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import styles from "./styles.module.scss";
@@ -22,7 +22,7 @@ interface ICardsFetch {
   freetogame_profile_url: string;
 }
 
-const Home = ({ release, relevance }: ICardsFetch[]) => {
+const Home = ({ release, relevance }:  InferGetStaticPropsType<typeof getStaticProps>) => {
   const responsive = {
     desktop: {
       breakpoint: { max: 9999, min: 1024 },
@@ -76,7 +76,7 @@ const Home = ({ release, relevance }: ICardsFetch[]) => {
           infinite={true}
           itemClass={styles.card}
           containerClass={styles.carousel}
-          // autoPlay={true}
+          autoPlay={true}
           customTransition="all 3.5s"
           swipeable={true}
           arrows={false}
