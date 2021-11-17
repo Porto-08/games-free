@@ -18,8 +18,6 @@ const NavBar = () => {
           <Link href="/strategy">Strategy</Link>
         </li>
       </ul>
-
-      <div></div>
     </nav>
   );
 };

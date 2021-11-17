@@ -10,10 +10,11 @@
 
 html,
 body {
-  font-family: sans-serif;
+  font-family: "Roboto", sans-serif;
   background-color: var(--primary-color);
   height: 100vh;
-  width: 100vw;
+  // width: 100vw;
+  overflow-x: hidden;
 }
 
 a {
@@ -33,11 +34,14 @@ a {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: auto 1fr;
-
+  justify-content: center;
+  
   width: 100%;
   height: 100%;
 
   .content {
-    padding: 20px;
+    padding: 0 20px 0 20px;
+    width: inherit;
+    height: inherit;
   }
 }

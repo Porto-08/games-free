@@ -4,6 +4,7 @@
   justify-items: center;
   height: 100%;
   width: 100%;
+  gap: 25px;
 
   .intro {
     display: flex;
@@ -17,7 +18,7 @@
       gap: 30px;
 
       h1 {
-        font-size: clamp(3.5rem, 4vw, 4rem);
+        font-size: clamp(3rem, 4vw, 4rem);
         font-weight: bold;
         color: var(--secondary-color);
       }
@@ -40,6 +41,7 @@
 
       @media screen and (max-width: 768px) {
         padding: 30px 10px 0 10px;
+        gap: 20px;
       }
     }
 
@@ -50,28 +52,37 @@
         display: none;
       }
     }
+
+    @media screen and (max-width: 768px) {
+    }
   }
 
   .content {
     display: grid;
     grid-template-columns: 1fr;
-
+    width: 100%;
 
     h2 {
       color: var(--text-color);
       font-size: 2rem;
       font-size: clamp(2rem, 2.5vw, 2.5rem);
     }
-    
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(5, minmax(200px, 1fr));
-      justify-items: center;
-      width: 100%;
-      gap: 25px;
-      margin-top: 10px;
-    }
   }
 
+  .carousel {
+    margin: 10px 0;
+    
 
+    .card {
+      cursor: pointer;
+
+      @media (max-width: 1900px) {
+        margin: 0 5px;
+      }
+
+      @media (max-width: 900px) {
+        margin: 0 40px;
+      }
+    }
+  }
 }
