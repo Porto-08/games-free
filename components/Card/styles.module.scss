@@ -50,6 +50,7 @@
       .icon {
         color: var(--text-color);
         font-size: 1.25rem;
+        cursor: pointer;
         transition: 0.1s ease;
 
         &:hover {
@@ -63,6 +64,7 @@
         gap: 5px;
 
         span {
+          cursor: pointer;
           font-size: .8rem;
           font-weight: 600;
           text-transform: uppercase;
@@ -72,6 +74,12 @@
           background: var(--primary-color);
           border-radius: 5px;
           padding: 5px;
+          transition: .2s ease;
+
+          &:hover {
+            filter: brightness(0.9);
+            transform: scale(1.1);
+          }
         }
       }
     }

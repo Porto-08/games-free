@@ -42,21 +42,21 @@ const Card = ({
       />
 
       <section className={styles.cardDescription}>
-        <h4 title="Nome">{title}</h4>
-        <p title="Descrição">{short_description}</p>
+        <h4 title={title}>{title}</h4>
+        <p title="Description">{short_description}</p>
 
         <div className={styles.icons}>
-          <AiFillPlusCircle className={styles.icon} title="Ver jogo"/>
+          <AiFillPlusCircle className={styles.icon} title="See about the game"/>
 
 
           <div>
             {platform == "PC (Windows)" ? (
-              <AiFillWindows className={styles.icon} title="Plataforma"/>
+              <AiFillWindows className={styles.icon} title="Plataform"/>
             ) : (
-              <AiFillChrome className={styles.icon} title="Plataforma"/>
+              <AiFillChrome className={styles.icon} title="Plataform"/>
             )}
 
-            <span title="Gênero">{genre}</span>
+            <span title="Genre">{genre}</span>
           </div>
         </div>
       </section>

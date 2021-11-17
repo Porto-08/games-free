@@ -4,7 +4,7 @@
   justify-items: center;
   height: 100%;
   width: 100%;
-  gap: 25px;
+  gap: 30px;
 
   .intro {
     display: flex;
@@ -24,19 +24,23 @@
       }
 
       p {
-        font-size: clamp(1rem, 1.25vw, 1.25rem);
+        font-size: clamp(.9rem, 1.25vw, 1.25rem);
         color: var(--text-color);
       }
 
       input {
         width: 80%;
-        padding: 5px 10px;
+        padding: 10px 15px;
 
         border: none;
         border-radius: 20px;
 
-        font-size: clamp(1.5rem, 1.75vw, 1.75rem);
+        font-size: clamp(1rem, 1.75vw, 1.5rem);
         color: var(--hover-text-color);
+
+        @media screen and (max-width: 900px) {
+          width: 100%;
+        }
       }
 
       @media screen and (max-width: 768px) {
@@ -70,18 +74,24 @@
   }
 
   .carousel {
-    margin: 10px 0;
-    
-
+    margin-bottom: 20px;
     .card {
-      cursor: pointer;
+      cursor: grab;
 
       @media (max-width: 1900px) {
-        margin: 0 5px;
+        margin: 0 60px 0 0;
+      }
+
+      @media (max-width: 1400px) {
+        margin: 0 50px 0 0;
       }
 
       @media (max-width: 900px) {
-        margin: 0 40px;
+        margin: 0 140px 0 0;
+      }
+
+      @media (max-width: 768px) {
+        margin: 0 150px 0 0;
       }
     }
   }

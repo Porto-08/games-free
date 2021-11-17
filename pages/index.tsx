@@ -22,19 +22,30 @@ interface ICardsFetch {
   freetogame_profile_url: string;
 }
 
-const Home = ({ release, relevance }:  InferGetStaticPropsType<typeof getStaticProps>) => {
+const Home = ({
+  release,
+  relevance,
+}: InferGetStaticPropsType<typeof getStaticProps>) => {
   const responsive = {
     desktop: {
-      breakpoint: { max: 9999, min: 1024 },
-      items: 6,
+      breakpoint: { max: 9999, min: 1335 },
+      items: 6.5,
+      partialVisibilityGutter: 40,
+    },
+    SmallDesktop: {
+      breakpoint: { max: 1336, min: 1025 },
+      items: 4.5,
+      partialVisibilityGutter: 40,
     },
     tablet: {
       breakpoint: { max: 1024, min: 999 },
-      items: 4,
+      items: 4.5,
+      partialVisibilityGutter: 40,
     },
     mobile: {
-      breakpoint: { max: 900, min: 0 },
-      items: 2,
+      breakpoint: { max: 998, min: 0 },
+      items: 2.5,
+      partialVisibilityGutter: 40,
     },
   };
 
@@ -44,7 +55,7 @@ const Home = ({ release, relevance }:  InferGetStaticPropsType<typeof getStaticP
         <title>Games Free</title>
         <meta
           name="description"
-          content="Aqui você encontrará informações sobre jogos gratuitos!"
+          content="Here do you find informations about free games. Just download and play!"
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
@@ -59,7 +70,11 @@ const Home = ({ release, relevance }:  InferGetStaticPropsType<typeof getStaticP
             </p>
           </div>
 
-          <input type="search" name="search" placeholder="Busque por um Jogo ou Catêgoria" />
+          <input
+            type="search"
+            name="search"
+            placeholder="Search about game or category"
+          />
         </div>
 
         <div className={styles.illustration}>
@@ -68,22 +83,19 @@ const Home = ({ release, relevance }:  InferGetStaticPropsType<typeof getStaticP
       </section>
 
       <section className={styles.content}>
-        <h2>Populares</h2>
+        <h2>Popular</h2>
 
         <Carousel
           responsive={responsive}
           draggable={true}
-          infinite={true}
           itemClass={styles.card}
           containerClass={styles.carousel}
-          autoPlay={true}
-          customTransition="all 3.5s"
           swipeable={true}
           arrows={false}
+          partialVisible={true}
+          ssr={true}
         >
           {relevance.map((item: ICardsFetch) => {
-            console.log(item);
-            
             return (
               <Card
                 id={item.id}
@@ -103,22 +115,19 @@ const Home = ({ release, relevance }:  InferGetStaticPropsType<typeof getStaticP
           })}
         </Carousel>
 
-        <h2>Mais Recentes</h2>
+        <h2>Recents</h2>
 
         <Carousel
           responsive={responsive}
           draggable={true}
-          infinite={true}
           itemClass={styles.card}
           containerClass={styles.carousel}
-          // autoPlay={true}
-          customTransition="all 3.5s"
           swipeable={true}
           arrows={false}
+          partialVisible={true}
+          ssr={true}
         >
           {release.map((item: ICardsFetch) => {
-            console.log(item);
-            
             return (
               <Card
                 id={item.id}
@@ -151,11 +160,19 @@ export const getStaticProps: GetStaticProps = async () => {
     "https://www.freetogame.com/api/games?sort-by=release-date"
   );
 
+  if (!relevance.data || !release.data) {
+    return {
+      notFound: true,
+      redirect: "/error",
+    };
+  }
+
   return {
     props: {
       relevance: relevance.data,
       release: release.data,
     },
+    revalidate: 10,
   };
 };
 

@@ -5,8 +5,8 @@ const Footer = () => {
   return (
     <footer className={styles.container}>
       <span>
-        &copy; {new Date().getFullYear()} Todos os direitos Reservados. Feito
-        com <BsFillSuitHeartFill /> por{" "}
+        &copy; {new Date().getFullYear()} Todos os direitos Reservados. <br />
+         Feito com <BsFillSuitHeartFill /> por{" "} 
         <a href="https://www.github.com/Porto-08" target="_blank" rel="noreferrer">
           Samuel Porto
         </a>
