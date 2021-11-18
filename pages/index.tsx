@@ -90,18 +90,28 @@ const Home = ({ release, relevance }: IHomeProps) => {
     setInformationsSearchs({ ...informationsSearchs, lastSearch: form });
   }, [search]);
 
-
-
   return (
-    <div
-      className={styles.container}
-    >
+    <div className={styles.container}>
       <Head>
         <title>Games Free</title>
-        <meta name="description" content="Informations about free games." />
+        <meta
+          name="description"
+          content="Here you are Informations about free games. Free to Play forever!"
+        />
+        {/* <link rel=”canonical” href=”https://exemplo.com/sapatos/sapato-vermelho-e-branco/”> */}
+        <link rel="canonical" href="https://games-free-to-play.vercel.app/" />
         <link rel="icon" href="/favicon.ico" />
+        <meta
+          property="og:url"
+          content="https://games-free-to-play.vercel.app/"
+        />
+        <meta property="og:type" content="blog" />
+        <meta property="og:title" content="Games Free" />
+        <meta
+          property="og:description"
+          content="Here you are Informations about free games. Free to Play forever!"
+        />
       </Head>
-
 
       <header>
         <ul className={styles.navBar}>
@@ -146,7 +156,12 @@ const Home = ({ release, relevance }: IHomeProps) => {
         </div>
 
         <div className={styles.illustration}>
-          <Image src={gamesIllustration} height={500} width={500} />
+          <Image
+            src={gamesIllustration}
+            height={500}
+            width={500}
+            alt="Boy play video-games"
+          />
         </div>
       </section>
 
