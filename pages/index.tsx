@@ -7,28 +7,20 @@ import Card from "../components/Card";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import axios from "axios";
-import { useState } from "react";
-
-interface ICardsFetch {
-  id: number;
-  title: string;
-  thumbnail: string;
-  short_description: string;
-  game_url: string;
-  genre: string;
-  platform: string;
-  publisher: string;
-  developer: string;
-  release_date: string;
-  freetogame_profile_url: string;
+import { ReactNode, useEffect, useState } from "react";
+import { ICardsFetch } from "../interfaces";
+import SearchCarousel from "../components/SearchCarousel";
+import { ImRocket } from "react-icons/im";
+interface IHomeProps {
+  release: ICardsFetch[];
+  relevance: ICardsFetch[];
 }
 
+interface ISearch {
+  search: string | undefined;
+}
 
-const Home: NextPage = ({
-  release,
-  relevance,
-}: InferGetStaticPropsType<typeof getStaticProps>) => {
-
+const Home = ({ release, relevance }: IHomeProps) => {
   const responsive = {
     desktop: {
       breakpoint: { max: 9999, min: 1335 },
@@ -52,16 +44,66 @@ const Home: NextPage = ({
     },
   };
 
-  const [search, setSearch] = useState<string>("");
+  const [form, setForm] = useState<string>();
+  const [error, setError] = useState<string>();
+  const [search, setSearch] = useState<ICardsFetch[]>();
+  const [lastSearch, setLastSearch] = useState<string>();
+  const [genres, setGenres] = useState<string[]>([]);
+
+  const filterGames = (event: React.FormEvent<HTMLInputElement>) => {
+    event.preventDefault();
+
+    if (!form) setError("Please enter a search term");
+
+    if (form) {
+      const title = release.filter((item: ICardsFetch) => {
+        return item.title.toLowerCase().includes(form.toLowerCase());
+      });
+
+      if (title.length > 0) return setSearch(title);
+
+      const category = release.filter((item: ICardsFetch) => {
+        return item.genre.toLowerCase().includes(form.toLowerCase());
+      });
+
+      if (category.length > 0) return setSearch(category);
+
+      setError(`Not results found for ${form}`);
+    }
+  };
+
+
+  
+  const getGenres = () => {
+    const arrayGenres: string[] = [];
+
+    release.forEach((item: ICardsFetch) => {
+      item.genre
+        .replace(" ", "")
+        .split(",")
+        .map((genre: string) => {
+          if (!arrayGenres.includes(genre)) {
+            arrayGenres.push(genre);
+          }
+        });
+    });
+
+    setGenres(arrayGenres);
+  };
+
+  useEffect(() => {
+    getGenres();
+  }, []);
+
+  useEffect(() => {
+    setLastSearch(form);
+  }, [search]);
 
   return (
     <div className={styles.container}>
       <Head>
         <title>Games Free</title>
-        <meta
-          name="description"
-          content="Informations about free games."
-        />
+        <meta name="description" content="Informations about free games." />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -75,13 +117,27 @@ const Home: NextPage = ({
             </p>
           </div>
 
-          <input
-            type="text"
-            name="search"
-            placeholder="Search about game or category"
-            onChange={(event) => setSearch(event.target.value)}
-            value={search}
-          />
+          <form onSubmit={filterGames} className={styles.searchBox}>
+            <input
+              type="text"
+              name="search"
+              placeholder="Search about game or category"
+              onChange={(e) => setForm(e.target.value)}
+              id="search"
+              list="genres"
+            
+            />
+            <datalist id="genres">
+              {genres.map((genre, index) => {
+                return <option key={index} value={genre} />;
+              })}
+            </datalist>
+
+            <button type="submit">
+              <ImRocket />
+            </button>
+          </form>
+          {error && <p className={styles.errorMessage}>{error}</p>}
         </div>
 
         <div className={styles.illustration}>
@@ -89,9 +145,12 @@ const Home: NextPage = ({
         </div>
       </section>
 
-      <section className={styles.searchContent}>
-        <h2>You search for: </h2>
-      </section>
+      {search && search.length > 0 && (
+        <section className={styles.searchContent}>
+          <h2>Search result for: {lastSearch}.</h2>
+          <SearchCarousel data={search} />
+        </section>
+      )}
 
       <section className={styles.content}>
         <h2>Popular</h2>

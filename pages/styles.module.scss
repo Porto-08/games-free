@@ -24,22 +24,46 @@
       }
 
       p {
-        font-size: clamp(.9rem, 1.25vw, 1.25rem);
+        font-size: clamp(0.9rem, 1.25vw, 1.25rem);
         color: var(--text-color);
       }
 
-      input {
-        width: 80%;
-        padding: 10px 15px;
+      .searchBox {
+        display: flex;
+        // gap: 10px;
+        input {
+          width: 80%;
+          padding: 10px 15px;
 
-        border: none;
-        border-radius: 20px;
+          border: none;
+          border-radius: 20px 0 0 20px;
 
-        font-size: clamp(1rem, 1.75vw, 1.5rem);
-        color: var(--hover-text-color);
+          font-size: clamp(1rem, 1.75vw, 1.5rem);
+          color: var(--hover-text-color);
 
-        @media screen and (max-width: 900px) {
-          width: 100%;
+          @media screen and (max-width: 900px) {
+            width: 100%;
+          }
+        }
+
+        button {
+          display: flex;
+          align-items: center;
+          padding: 10px 15px;
+
+          background: var(--secondary-color);
+          color: #fff;
+          
+          font-size: clamp(1.5rem, 1.75vw, 1.75rem);
+          border: none;
+          border-radius: 0 20px 20px 0;
+          
+          transition: .2s ease;
+          
+          &:hover {
+            cursor: pointer;
+            background: var(--hover-color);
+          }
         }
       }
 
@@ -61,7 +85,8 @@
     }
   }
 
-  .content {
+  .content,
+  .searchContent {
     display: grid;
     grid-template-columns: 1fr;
     width: 100%;

@@ -24,10 +24,6 @@ const Card = ({
   platform,
 }: ICard) => {
 
-
-  console.log(platform);
-  
-
   return (
     <div className={styles.card}>
       <Image
