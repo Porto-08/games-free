@@ -111,6 +111,7 @@ const Home = ({ release, relevance }: IHomeProps) => {
           property="og:description"
           content="Here you are Informations about free games. Free to Play forever!"
         />
+        <meta property="og:image" content="https://www.freetogame.com/g/466/thumbnail.jpg"/>
       </Head>
 
       <header>
