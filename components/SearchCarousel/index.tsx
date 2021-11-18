@@ -6,9 +6,10 @@ import { ICardsFetch } from "../../interfaces";
 
 interface ISearchCarouselProps {
     data: ICardsFetch[];
+    filter: (form: string) => void;
 }
 
-const SearchCarousel = ({ data }: ISearchCarouselProps) => {
+const SearchCarousel = ({ data, filter }: ISearchCarouselProps) => {
   const responsive = {
     desktop: {
       breakpoint: { max: 9999, min: 1335 },
@@ -58,6 +59,7 @@ const SearchCarousel = ({ data }: ISearchCarouselProps) => {
             platform={item.platform}
             publisher={item.publisher}
             release_date={item.release_date}
+            filter={filter}
           />
         );
       })}

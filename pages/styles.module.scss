@@ -6,6 +6,61 @@
   width: 100%;
   gap: 30px;
 
+  .buttonScrollTop {
+    position: relative;
+    bottom: 10px;
+  }
+
+  header {
+    width: 100%;
+  }
+
+  .navBar {
+    list-style: none;
+    background: var(--tertiary-color);
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 1rem 0;
+    gap: 6rem;
+
+    li {
+      color: var(--secondary-color);
+      font-size: clamp(1rem, 1.5vw, 1.25rem);
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      transition: color 0.3s ease-in-out;
+
+      &:hover {
+        color: var(--hover-color);
+      }
+
+      &::after {
+        content: "";
+        display: block;
+        width: 0;
+        height: 1px;
+        background-color: var(--hover-color);
+        transition: width 0.2s ease-in-out;
+      }
+
+      &:hover::after {
+        width: 100%;
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    .container {
+      .navBar {
+        gap: 2.5rem;
+      }
+    }
+  }
+
   .intro {
     display: flex;
     align-items: center;
@@ -53,13 +108,13 @@
 
           background: var(--secondary-color);
           color: #fff;
-          
+
           font-size: clamp(1.5rem, 1.75vw, 1.75rem);
           border: none;
           border-radius: 0 20px 20px 0;
-          
-          transition: .2s ease;
-          
+
+          transition: 0.2s ease;
+
           &:hover {
             cursor: pointer;
             background: var(--hover-color);
@@ -85,8 +140,26 @@
     }
   }
 
+  .category {
+    h2 {
+      color: var(--text-color);
+      font-size: 2rem;
+      font-size: clamp(2rem, 2.5vw, 2.5rem);
+      margin-bottom: 10px;
+    }
+
+    .cardGrid {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(200px, 1fr));
+      gap: 15px;
+    }
+
+  }
+
+
   .content,
   .searchContent {
+    padding: 0 20px 0 20px;
     display: grid;
     grid-template-columns: 1fr;
     width: 100%;

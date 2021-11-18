@@ -13,6 +13,7 @@ interface ICard {
   developer: string;
   release_date: string;
   freetogame_profile_url: string;
+  filter: (form: string) => void;
 }
 
 const Card = ({
@@ -22,6 +23,7 @@ const Card = ({
   title,
   genre,
   platform,
+  filter,
 }: ICard) => {
 
   return (
@@ -47,12 +49,12 @@ const Card = ({
 
           <div>
             {platform == "PC (Windows)" ? (
-              <AiFillWindows className={styles.icon} title="Plataform"/>
+              <AiFillWindows className={styles.icon} title="Plataform" onClick={() => filter("PC (Windows)")}/>
             ) : (
-              <AiFillChrome className={styles.icon} title="Plataform"/>
+              <AiFillChrome className={styles.icon} title="Plataform" onClick={() => filter("Web Browser")}/>
             )}
 
-            <span title="Genre">{genre}</span>
+            <span title="Genre" onClick={() => filter(genre)} >{genre}</span>
           </div>
         </div>
       </section>

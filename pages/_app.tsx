@@ -3,6 +3,8 @@ import NavBar from "../components/NavBar";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import Footer from "../components/Footer";
+import { useEffect, useState } from "react";
+import { GrLinkTop } from "react-icons/gr";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -15,8 +17,8 @@ function MyApp({ Component, pageProps }: AppProps) {
           rel="stylesheet"
         />
       </Head>
-      
-      <div className="container">
+
+      <div className="container" onScroll={() => console.log(Window)}>
         <NavBar />
 
         <div className="content">

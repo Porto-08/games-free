@@ -1,57 +1,31 @@
-import type { GetStaticProps, InferGetStaticPropsType, NextPage } from "next";
+import type { GetStaticProps } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import styles from "./styles.module.scss";
 import gamesIllustration from "../assets/svg/games.svg";
 import Card from "../components/Card";
-import Carousel from "react-multi-carousel";
-import "react-multi-carousel/lib/styles.css";
 import axios from "axios";
-import { ReactNode, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { ICardsFetch } from "../interfaces";
 import SearchCarousel from "../components/SearchCarousel";
 import { ImRocket } from "react-icons/im";
+import { GrLinkTop } from "react-icons/gr";
 interface IHomeProps {
   release: ICardsFetch[];
   relevance: ICardsFetch[];
 }
 
-interface ISearch {
-  search: string | undefined;
-}
-
 const Home = ({ release, relevance }: IHomeProps) => {
-  const responsive = {
-    desktop: {
-      breakpoint: { max: 9999, min: 1335 },
-      items: 6.7,
-      partialVisibilityGutter: 40,
-    },
-    SmallDesktop: {
-      breakpoint: { max: 1336, min: 1025 },
-      items: 4.5,
-      partialVisibilityGutter: 40,
-    },
-    tablet: {
-      breakpoint: { max: 1024, min: 999 },
-      items: 4.5,
-      partialVisibilityGutter: 40,
-    },
-    mobile: {
-      breakpoint: { max: 998, min: 0 },
-      items: 2.5,
-      partialVisibilityGutter: 40,
-    },
-  };
-
   const [form, setForm] = useState<string>();
   const [error, setError] = useState<string>();
   const [search, setSearch] = useState<ICardsFetch[]>();
-  const [lastSearch, setLastSearch] = useState<string>();
   const [genres, setGenres] = useState<string[]>([]);
+  const [category, setCategory] = useState<ICardsFetch[]>([]);
+  const [informationsSearchs, setInformationsSearchs] = useState<any>();
+  const filterGames = (form: string) => {
+    window.scrollTo(0, 500);
 
-  const filterGames = (event:any) => {
-    event.preventDefault();
+    setForm(form);
 
     if (!form) setError("Please enter a search term");
 
@@ -68,12 +42,29 @@ const Home = ({ release, relevance }: IHomeProps) => {
 
       if (category.length > 0) return setSearch(category);
 
+      const platform = release.filter((item: ICardsFetch) => {
+        return item.platform.toLowerCase().includes(form.toLowerCase());
+      });
+
+      if (platform.length > 0) return setSearch(platform);
+
       setError(`Not results found for ${form}`);
     }
   };
 
+  const filterGenres = (genre: string) => {
+    setInformationsSearchs({ ...informationsSearchs, genre: genre });
+    setSearch([]);
 
-  
+    const genreFilter = release.filter((item: ICardsFetch) => {
+      return item.genre.toLowerCase().includes(genre.toLowerCase());
+    });
+
+    setCategory(genreFilter);
+
+    window.scrollTo(0, 500);
+  };
+
   const getGenres = () => {
     const arrayGenres: string[] = [];
 
@@ -96,16 +87,31 @@ const Home = ({ release, relevance }: IHomeProps) => {
   }, []);
 
   useEffect(() => {
-    setLastSearch(form);
+    setInformationsSearchs({ ...informationsSearchs, lastSearch: form });
   }, [search]);
 
+
+
   return (
-    <div className={styles.container}>
+    <div
+      className={styles.container}
+      onScroll={() => setScrollY(window.scrollY)}
+    >
       <Head>
         <title>Games Free</title>
         <meta name="description" content="Informations about free games." />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+
+
+      <header>
+        <ul className={styles.navBar}>
+          <li onClick={() => filterGenres("Shooter")}>Shooter</li>
+          <li onClick={() => filterGenres("Mmo")}>MMO</li>
+          <li onClick={() => filterGenres("Rpg")}>RPG</li>
+          <li onClick={() => filterGenres("Strategy")}>Strategy</li>
+        </ul>
+      </header>
 
       <section className={styles.intro}>
         <div className={styles.search}>
@@ -117,7 +123,7 @@ const Home = ({ release, relevance }: IHomeProps) => {
             </p>
           </div>
 
-          <form onSubmit={filterGames} className={styles.searchBox}>
+          <form className={styles.searchBox}>
             <input
               type="text"
               name="search"
@@ -125,7 +131,6 @@ const Home = ({ release, relevance }: IHomeProps) => {
               onChange={(e) => setForm(e.target.value)}
               id="search"
               list="genres"
-            
             />
             <datalist id="genres">
               {genres.map((genre, index) => {
@@ -133,7 +138,7 @@ const Home = ({ release, relevance }: IHomeProps) => {
               })}
             </datalist>
 
-            <button type="submit">
+            <button type="button" onClick={() => filterGames(form ?? "")}>
               <ImRocket />
             </button>
           </form>
@@ -147,20 +152,48 @@ const Home = ({ release, relevance }: IHomeProps) => {
 
       {search && search.length > 0 && (
         <section className={styles.searchContent}>
-          <h2>Search result for: {lastSearch}.</h2>
-          <SearchCarousel data={search} />
+          <h2>Search result for: {informationsSearchs?.lastSearch}.</h2>
+          <SearchCarousel data={search} filter={filterGames} />
         </section>
       )}
 
-      <section className={styles.content}>
-        <h2>Popular</h2>
+      {category && category.length > 0 ? (
+        <section className={styles.category}>
+          <h2>{informationsSearchs?.genre}</h2>
 
-        <SearchCarousel data={relevance} />
+          <div className={styles.cardGrid}>
+            {category.map((item: ICardsFetch, index: number) => {
+              return (
+                <Card
+                  id={item.id}
+                  key={item.id}
+                  title={item.title}
+                  thumbnail={item.thumbnail}
+                  short_description={item.short_description}
+                  genre={item.genre}
+                  developer={item.developer}
+                  freetogame_profile_url={item.freetogame_profile_url}
+                  game_url={item.game_url}
+                  platform={item.platform}
+                  publisher={item.publisher}
+                  release_date={item.release_date}
+                  filter={filterGenres}
+                />
+              );
+            })}
+          </div>
+        </section>
+      ) : (
+        <section className={styles.content}>
+          <h2>Popular</h2>
 
-        <h2>Recents</h2>
+          <SearchCarousel data={relevance} filter={filterGames} />
 
-        <SearchCarousel data={release} />
-      </section>
+          <h2>Recents</h2>
+
+          <SearchCarousel data={release} filter={filterGames} />
+        </section>
+      )}
     </div>
   );
 };

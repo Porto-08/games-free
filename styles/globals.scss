@@ -13,8 +13,23 @@ body {
   font-family: "Roboto", sans-serif;
   background-color: var(--primary-color);
   height: 100vh;
-  // width: 100vw;
-  overflow-x: hidden;
+  width: 100%;
+  scroll-behavior: smooth;
+}
+
+body::-webkit-scrollbar {
+  width: 10px;
+  height: 0;         /* width of the entire scrollbar */
+}
+
+body::-webkit-scrollbar-track {
+  background: var(--secondary-color);        /* color of the tracking area */
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: var(--primary-color);    /* color of the scroll thumb */
+  border-radius: 25px;       /* roundness of the scroll thumb */
+  border: 3px solid var(--secondary-color);  /* creates padding around scroll thumb */
 }
 
 a {
@@ -40,7 +55,6 @@ a {
   height: 100%;
 
   .content {
-    padding: 0 20px 0 20px;
     width: inherit;
     height: inherit;
   }

@@ -2,6 +2,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 20px;
   width: 100%;
   padding: 10px;
   text-align: center;
@@ -12,6 +13,18 @@
     &:hover {
       color: var(--hover-color);
       text-decoration: underline;
+    }
+  }
+
+  .scrollTop {
+    color: var(--secondary-color);
+    font-size: 1.75rem;
+    cursor: pointer;
+    transition: .3s ease;
+
+    &:hover {
+      transform: scale(1.1);
+      color: var(--text-color);
     }
   }
 }
