@@ -24,7 +24,7 @@ const Home = ({ release, relevance }: IHomeProps) => {
   const responsive = {
     desktop: {
       breakpoint: { max: 9999, min: 1335 },
-      items: 6.5,
+      items: 6.7,
       partialVisibilityGutter: 40,
     },
     SmallDesktop: {
@@ -50,7 +50,7 @@ const Home = ({ release, relevance }: IHomeProps) => {
   const [lastSearch, setLastSearch] = useState<string>();
   const [genres, setGenres] = useState<string[]>([]);
 
-  const filterGames = (event: React.FormEvent<HTMLInputElement>) => {
+  const filterGames = (event:any) => {
     event.preventDefault();
 
     if (!form) setError("Please enter a search term");
@@ -155,67 +155,11 @@ const Home = ({ release, relevance }: IHomeProps) => {
       <section className={styles.content}>
         <h2>Popular</h2>
 
-        <Carousel
-          responsive={responsive}
-          draggable={true}
-          itemClass={styles.card}
-          containerClass={styles.carousel}
-          swipeable={true}
-          arrows={false}
-          partialVisible={true}
-          ssr={true}
-        >
-          {relevance.map((item: ICardsFetch) => {
-            return (
-              <Card
-                id={item.id}
-                key={item.id}
-                title={item.title}
-                thumbnail={item.thumbnail}
-                short_description={item.short_description}
-                genre={item.genre}
-                developer={item.developer}
-                freetogame_profile_url={item.freetogame_profile_url}
-                game_url={item.game_url}
-                platform={item.platform}
-                publisher={item.publisher}
-                release_date={item.release_date}
-              />
-            );
-          })}
-        </Carousel>
+        <SearchCarousel data={relevance} />
 
         <h2>Recents</h2>
 
-        <Carousel
-          responsive={responsive}
-          draggable={true}
-          itemClass={styles.card}
-          containerClass={styles.carousel}
-          swipeable={true}
-          arrows={false}
-          partialVisible={true}
-          ssr={true}
-        >
-          {release.map((item: ICardsFetch) => {
-            return (
-              <Card
-                id={item.id}
-                key={item.id}
-                title={item.title}
-                thumbnail={item.thumbnail}
-                short_description={item.short_description}
-                genre={item.genre}
-                developer={item.developer}
-                freetogame_profile_url={item.freetogame_profile_url}
-                game_url={item.game_url}
-                platform={item.platform}
-                publisher={item.publisher}
-                release_date={item.release_date}
-              />
-            );
-          })}
-        </Carousel>
+        <SearchCarousel data={release} />
       </section>
     </div>
   );
