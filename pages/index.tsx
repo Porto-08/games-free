@@ -95,7 +95,6 @@ const Home = ({ release, relevance }: IHomeProps) => {
   return (
     <div
       className={styles.container}
-      onScroll={() => setScrollY(window.scrollY)}
     >
       <Head>
         <title>Games Free</title>
@@ -106,6 +105,7 @@ const Home = ({ release, relevance }: IHomeProps) => {
 
       <header>
         <ul className={styles.navBar}>
+          <li onClick={() => setCategory([])}>Home</li>
           <li onClick={() => filterGenres("Shooter")}>Shooter</li>
           <li onClick={() => filterGenres("Mmo")}>MMO</li>
           <li onClick={() => filterGenres("Rpg")}>RPG</li>
