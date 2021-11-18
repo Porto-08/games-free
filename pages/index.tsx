@@ -7,6 +7,7 @@ import Card from "../components/Card";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import axios from "axios";
+import { useState } from "react";
 
 interface ICardsFetch {
   id: number;
@@ -22,10 +23,12 @@ interface ICardsFetch {
   freetogame_profile_url: string;
 }
 
-const Home = ({
+
+const Home: NextPage = ({
   release,
   relevance,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
+
   const responsive = {
     desktop: {
       breakpoint: { max: 9999, min: 1335 },
@@ -49,13 +52,15 @@ const Home = ({
     },
   };
 
+  const [search, setSearch] = useState<string>("");
+
   return (
     <div className={styles.container}>
       <Head>
         <title>Games Free</title>
         <meta
           name="description"
-          content="Here do you find informations about free games. Just download and play!"
+          content="Informations about free games."
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
@@ -71,15 +76,21 @@ const Home = ({
           </div>
 
           <input
-            type="search"
+            type="text"
             name="search"
             placeholder="Search about game or category"
+            onChange={(event) => setSearch(event.target.value)}
+            value={search}
           />
         </div>
 
         <div className={styles.illustration}>
           <Image src={gamesIllustration} height={500} width={500} />
         </div>
+      </section>
+
+      <section className={styles.searchContent}>
+        <h2>You search for: </h2>
       </section>
 
       <section className={styles.content}>
