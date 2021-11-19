@@ -13,22 +13,22 @@ const SearchCarousel = ({ data, filter }: ISearchCarouselProps) => {
   const responsive = {
     desktop: {
       breakpoint: { max: 9999, min: 1335 },
-      items: 6.5,
+      items: 3.5,
       partialVisibilityGutter: 40,
     },
-    SmallDesktop: {
+    smallDesktop: {
       breakpoint: { max: 1336, min: 1025 },
-      items: 4.5,
+      items: 2.5,
       partialVisibilityGutter: 40,
     },
     tablet: {
       breakpoint: { max: 1024, min: 999 },
-      items: 4.5,
+      items: 2,
       partialVisibilityGutter: 40,
     },
     mobile: {
       breakpoint: { max: 998, min: 0 },
-      items: 2.5,
+      items: 1,
       partialVisibilityGutter: 40,
     },
   };
@@ -40,7 +40,6 @@ const SearchCarousel = ({ data, filter }: ISearchCarouselProps) => {
       itemClass={styles.card}
       containerClass={styles.carousel}
       swipeable={true}
-      arrows={false}
       partialVisible={true}
       ssr={true}
     >

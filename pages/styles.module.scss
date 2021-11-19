@@ -11,6 +11,12 @@
     bottom: 10px;
   }
 
+  .errorMessage {
+    color: red !important;
+    font-style: italic;
+    font-weight: bold;
+  }
+
   header {
     width: 100%;
   }
@@ -51,15 +57,13 @@
         width: 100%;
       }
     }
-  }
 
-  @media (max-width: 768px) {
-    .container {
-      .navBar {
-        gap: 2.5rem;
-      }
+    @media (max-width: 768px) {
+      gap: 1.1rem;
     }
   }
+
+  
 
   .intro {
     display: flex;
@@ -85,7 +89,7 @@
 
       .searchBox {
         display: flex;
-        // gap: 10px;
+
         input {
           width: 80%;
           padding: 10px 15px;
@@ -123,7 +127,7 @@
       }
 
       @media screen and (max-width: 768px) {
-        padding: 30px 10px 0 10px;
+        padding: 0 20px;
         gap: 20px;
       }
     }
@@ -135,14 +139,12 @@
         display: none;
       }
     }
-
-    @media screen and (max-width: 768px) {
-    }
   }
 
   .category {
     width: 100%;
-    padding: 0 20px;
+    max-width: 85vw;
+
     h2 {
       color: var(--text-color);
       font-size: 2rem;
@@ -152,19 +154,30 @@
 
     .cardGrid {
       display: grid;
-      grid-template-columns: repeat(6, minmax(200px, 1fr));
-      gap: 10px;
+      grid-template-columns: repeat(4, minmax(200px, 1fr));
+      gap: 30px;
+      width: 100%;
+
+      @media screen and (max-width: 768px) {
+        justify-items: center;
+        grid-template-columns: repeat(1, minmax(200px, 1fr));
+      }
     }
 
+    @media screen and (max-width: 768px) {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
   }
-
 
   .content,
   .searchContent {
-    padding: 0 20px 0 20px;
     display: grid;
     grid-template-columns: 1fr;
+
     width: 100%;
+    max-width: 80vw;
 
     h2 {
       color: var(--text-color);

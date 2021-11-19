@@ -27,11 +27,11 @@ const Card = ({
 }: ICard) => {
 
   return (
-    <div className={styles.card}>
+    <div className={`${styles.card} animate__animated animate__fadeIn`}>
       <Image
         src={thumbnail}
         alt="Game Thumbnail"
-        width={225}
+        width={365}
         height={206}
         layout="fixed"
         objectFit="fill"

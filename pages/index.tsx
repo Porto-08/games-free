@@ -15,17 +15,17 @@ interface IHomeProps {
   relevance: ICardsFetch[];
 }
 
-const Home = ({ release, relevance }: IHomeProps) => {
-  const [form, setForm] = useState<string>();
-  const [error, setError] = useState<string>();
-  const [search, setSearch] = useState<ICardsFetch[]>();
+const Home = ({ release, relevance}: IHomeProps, ) => {  
+  const [form, setForm] = useState<string>("");
+  const [error, setError] = useState<string>("");
+  const [search, setSearch] = useState<ICardsFetch[]>([]);
   const [genres, setGenres] = useState<string[]>([]);
   const [category, setCategory] = useState<ICardsFetch[]>([]);
   const [informationsSearchs, setInformationsSearchs] = useState<any>();
-  const filterGames = (form: string) => {
-    window.scrollTo(0, 500);
 
+  const filterGames = (form: string) => {
     setForm(form);
+    setCategory([]);
 
     if (!form) setError("Please enter a search term");
 
@@ -34,35 +34,59 @@ const Home = ({ release, relevance }: IHomeProps) => {
         return item.title.toLowerCase().includes(form.toLowerCase());
       });
 
-      if (title.length > 0) return setSearch(title);
+      if (title.length > 0) {
+        document.querySelector("#searchContainer")?.scrollIntoView();
+
+        setError("");
+        setSearch(title);
+        return;
+      }
 
       const category = release.filter((item: ICardsFetch) => {
         return item.genre.toLowerCase().includes(form.toLowerCase());
       });
 
-      if (category.length > 0) return setSearch(category);
+      if (category.length > 0) {
+        document.querySelector("#searchContainer")?.scrollIntoView();
+        setError("");
+        setSearch(category);
+        return;
+      }
 
       const platform = release.filter((item: ICardsFetch) => {
         return item.platform.toLowerCase().includes(form.toLowerCase());
       });
 
-      if (platform.length > 0) return setSearch(platform);
+      if (platform.length > 0) {
+        document.querySelector("#searchContainer")?.scrollIntoView();
 
-      setError(`Not results found for ${form}`);
+        setError("");
+        setSearch(platform);
+        return;
+      }
+
+      setError(`Not results found for: "${form}". :(`);
+      setSearch([]);
+
+      if (screen.width < 640 || screen.height < 480) {
+        window.scrollTo(0, 200);
+      } else {
+        window.scrollTo(0, 500);
+      }
     }
   };
 
   const filterGenres = (genre: string) => {
     setInformationsSearchs({ ...informationsSearchs, genre: genre });
     setSearch([]);
+    setForm("");
 
     const genreFilter = release.filter((item: ICardsFetch) => {
+      document.querySelector("#searchContainer")?.scrollIntoView();
       return item.genre.toLowerCase().includes(genre.toLowerCase());
     });
 
     setCategory(genreFilter);
-
-    window.scrollTo(0, 500);
   };
 
   const getGenres = () => {
@@ -91,14 +115,13 @@ const Home = ({ release, relevance }: IHomeProps) => {
   }, [search]);
 
   return (
-    <div className={styles.container}>
+    <div className={`${styles.container} animate__animated animate__fadeIn`}>
       <Head>
         <title>Games Free</title>
         <meta
           name="description"
           content="Here you are Informations about free games. Free to Play forever!"
         />
-        {/* <link rel=”canonical” href=”https://exemplo.com/sapatos/sapato-vermelho-e-branco/”> */}
         <link rel="canonical" href="https://games-free-to-play.vercel.app/" />
         <link rel="icon" href="/favicon.ico" />
         <meta
@@ -111,10 +134,13 @@ const Home = ({ release, relevance }: IHomeProps) => {
           property="og:description"
           content="Here you have informations about free games. Free to Play forever!"
         />
-        <meta property="og:image" content="https://www.freetogame.com/g/466/thumbnail.jpg"/>
-        <meta property="og:image:alt" content="Valorant"/>
-        <meta property="og:image:width" content="400"/>
-        <meta property="og:image:height" content="400"/>
+        <meta
+          property="og:image"
+          content="https://www.freetogame.com/g/466/thumbnail.jpg"
+        />
+        <meta property="og:image:alt" content="Valorant" />
+        <meta property="og:image:width" content="400" />
+        <meta property="og:image:height" content="400" />
       </Head>
 
       <header>
@@ -141,11 +167,12 @@ const Home = ({ release, relevance }: IHomeProps) => {
             <input
               type="text"
               name="search"
+              id="search"
               placeholder="Search about game or category"
               onChange={(e) => setForm(e.target.value)}
-              id="search"
               list="genres"
             />
+
             <datalist id="genres">
               {genres.map((genre, index) => {
                 return <option key={index} value={genre} />;
@@ -156,7 +183,6 @@ const Home = ({ release, relevance }: IHomeProps) => {
               <ImRocket />
             </button>
           </form>
-          {error && <p className={styles.errorMessage}>{error}</p>}
         </div>
 
         <div className={styles.illustration}>
@@ -170,9 +196,15 @@ const Home = ({ release, relevance }: IHomeProps) => {
       </section>
 
       {search && search.length > 0 && (
-        <section className={styles.searchContent}>
+        <section id="searchContainer" className={styles.searchContent}>
           <h2>Search result for: {informationsSearchs?.lastSearch}.</h2>
           <SearchCarousel data={search} filter={filterGames} />
+        </section>
+      )}
+
+      {error && (
+        <section className={styles.searchContent}>
+          <h2 className={styles.errorMessage}>{error}</h2>
         </section>
       )}
 
@@ -196,7 +228,7 @@ const Home = ({ release, relevance }: IHomeProps) => {
                   platform={item.platform}
                   publisher={item.publisher}
                   release_date={item.release_date}
-                  filter={filterGenres}
+                  filter={filterGames}
                 />
               );
             })}
@@ -225,6 +257,7 @@ export const getStaticProps: GetStaticProps = async () => {
   const release = await axios.get<ICardsFetch[]>(
     "https://www.freetogame.com/api/games?sort-by=release-date"
   );
+  
 
   if (!relevance.data || !release.data) {
     return {
