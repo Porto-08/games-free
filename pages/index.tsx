@@ -271,7 +271,7 @@ export const getStaticProps: GetStaticProps = async () => {
       relevance: relevance.data,
       release: release.data,
     },
-    revalidate: 10,
+    revalidate: 60 * 60 * 48,
   };
 };
 

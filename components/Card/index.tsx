@@ -1,6 +1,7 @@
 import styles from "./styles.module.scss";
 import Image from "next/image";
 import { AiFillPlusCircle, AiFillChrome, AiFillWindows } from "react-icons/ai";
+import { useRouter } from "next/dist/client/router";
 interface ICard {
   id: number;
   title: string;
@@ -26,6 +27,8 @@ const Card = ({
   filter,
 }: ICard) => {
 
+  const router = useRouter()
+
   return (
     <div className={`${styles.card} animate__animated animate__fadeIn`}>
       <Image
@@ -44,7 +47,7 @@ const Card = ({
         <p title="Description">{short_description}</p>
 
         <div className={styles.icons}>
-          <AiFillPlusCircle className={styles.icon} title="See about the game"/>
+          <AiFillPlusCircle className={styles.icon} title="See about the game" onClick={() => router.push(`/game/${id}`)}/>
 
 
           <div>
