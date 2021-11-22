@@ -6,14 +6,23 @@ import Image from "next/image";
 import Head from "next/head";
 import Link from "next/link";
 import { BiArrowBack } from "react-icons/bi";
+import { useEffect, useState } from "react";
 
 interface IGameProps {
   game: IGame;
 }
 
+interface IRandomNumber {
+  background: number;
+  header: number;
+}
+
 const game = ({ game }: IGameProps) => {
-  const randomNumber = Math.round(Math.random() * 2);
-  const randomNumberThumb = Math.round(Math.random() * 2);
+  const [randomNumber, setRandomNumber] = useState<IRandomNumber>({
+    background: Math.round(Math.random() * 2),
+    header: Math.round(Math.random() * 2),
+  });
+
 
   function formatedDate(date) {
     const newDate = new Date(date.replace(/\s/, "T"));
@@ -34,7 +43,9 @@ const game = ({ game }: IGameProps) => {
       </Head>
 
       <div
-        style={{ background: `url(${game.screenshots[randomNumber].image}) no-repeat center center` }}
+        style={{
+          background: `url(${game.screenshots[randomNumber.background].image}) no-repeat center center`,
+        }}
         className={`${styles.container} animate__animated animate__fadeIn`}
       >
         <Link href="/">
@@ -47,54 +58,65 @@ const game = ({ game }: IGameProps) => {
           <Image
             height={300}
             width={1200}
-            // layout="fill"
-            src={game.screenshots[randomNumberThumb].image}
+            src={
+              game.screenshots[randomNumber.header].image 
+            }
             objectFit="cover"
-            loading="eager"
+            // loading="eager"
             alt="Game thumbnail"
           />
 
           <div className={styles.contentText}>
             <section className={styles.introduction}>
               <div>
-                <h1>{game.title} - </h1>
-                <a href={game.game_url} target="_blank" rel="noreferrer">
+                <h1>{game.title || "Title Game"} - </h1>
+                <a href={game.game_url || "#"} target="_blank" rel="noreferrer">
                   Visit Game
                 </a>
               </div>
 
               <div>
                 <div>
-                  <span>{game.genre}</span>
-                  <span>{formatedDate(game.release_date)}</span>
+                  <span>{game.genre || "Genre"}</span>
+                  <span>
+                    {formatedDate(game.release_date) || "release_date"}
+                  </span>
                 </div>
 
                 <div>
-                  <span>{game.developer}</span>
+                  <span>{game.developer || "Developer"}</span>
                 </div>
               </div>
 
-              <p>{game.description}</p>
+              <p>{game.description || "Description"}</p>
             </section>
 
             <section className={styles.requirements}>
               <section>
                 <h2>Os</h2>
-                <span>{game.minimum_system_requirements.os}</span>
+                <span>{game.minimum_system_requirements.os || "Windows"}</span>
 
                 <h2>Memory</h2>
-                <span>{game.minimum_system_requirements.memory}</span>
+                <span>
+                  {game.minimum_system_requirements.memory || "Memory Ram"}
+                </span>
 
                 <h2>Storage</h2>
-                <span>{game.minimum_system_requirements.storage}</span>
+                <span>
+                  {game.minimum_system_requirements.storage || "Storage"}
+                </span>
               </section>
 
               <section>
                 <h2>Processor</h2>
-                <span>{game.minimum_system_requirements.processor}</span>
+                <span>
+                  {game.minimum_system_requirements.processor || "Processor"}
+                </span>
 
                 <h2>Graphics</h2>
-                <span>{game.minimum_system_requirements.memory}</span>
+                <span>
+                  {game.minimum_system_requirements.graphics || "Graphics"}
+                </span>
               </section>
             </section>
           </div>

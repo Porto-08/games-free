@@ -10,6 +10,7 @@ import { ICardsFetch } from "../interfaces";
 import SearchCarousel from "../components/SearchCarousel";
 import { ImRocket } from "react-icons/im";
 import { GrLinkTop } from "react-icons/gr";
+import Footer from "../components/Footer";
 
 interface IHomeProps {
   release: ICardsFetch[];
@@ -246,6 +247,7 @@ const Home = ({ release, relevance}: IHomeProps, ) => {
           <SearchCarousel data={release} filter={filterGames} />
         </section>
       )}
+      <Footer />
     </div>
   );
 };
