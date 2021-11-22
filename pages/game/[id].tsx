@@ -34,12 +34,12 @@ const game = ({ game }: IGameProps) => {
       </Head>
 
       <div
-        style={{ background: `url(${game.screenshots[randomNumber].image})` }}
-        className={styles.container}
+        style={{ background: `url(${game.screenshots[randomNumber].image}) no-repeat center center` }}
+        className={`${styles.container} animate__animated animate__fadeIn`}
       >
         <Link href="/">
           <span className={styles.backToHome}>
-            <BiArrowBack  />
+            <BiArrowBack />
           </span>
         </Link>
 
@@ -47,6 +47,7 @@ const game = ({ game }: IGameProps) => {
           <Image
             height={300}
             width={1200}
+            // layout="fill"
             src={game.screenshots[randomNumberThumb].image}
             objectFit="cover"
             loading="eager"
@@ -104,19 +105,62 @@ const game = ({ game }: IGameProps) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const { data } = await axios.get("https://www.freetogame.com/api/games");
-
-  const paths = data.map((game: ICardsFetch) => {
-    return {
+  const paths = [
+    {
       params: {
-        id: game.id.toString(),
+        id: "1",
       },
-    };
-  });
+    },
+    {
+      params: {
+        id: "2",
+      },
+    },
+    {
+      params: {
+        id: "3",
+      },
+    },
+    {
+      params: {
+        id: "4",
+      },
+    },
+    {
+      params: {
+        id: "5",
+      },
+    },
+    {
+      params: {
+        id: "6",
+      },
+    },
+    {
+      params: {
+        id: "7",
+      },
+    },
+    {
+      params: {
+        id: "8",
+      },
+    },
+    {
+      params: {
+        id: "9",
+      },
+    },
+    {
+      params: {
+        id: "10",
+      },
+    },
+  ];
 
   return {
     paths,
-    fallback: false,
+    fallback: "blocking",
   };
 };
 
