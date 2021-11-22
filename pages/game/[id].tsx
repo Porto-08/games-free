@@ -18,7 +18,7 @@ interface IRandomNumber {
 }
 
 const Game = ({ game }: IGameProps) => {
-  const [randomNumber, setRandomNumber] = useState({
+  const [randomNumber, setRandomNumber] = useState<IRandomNumber>({
     background: 0,
     header: 1,
   });
