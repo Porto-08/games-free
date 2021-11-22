@@ -17,19 +17,11 @@ interface IRandomNumber {
   header: number;
 }
 
-const game = ({ game }: IGameProps) => {
-  const [randomNumber, setRandomNumber] = useState<IRandomNumber>({
+const Game = ({ game }: IGameProps) => {
+  const [randomNumber, setRandomNumber] = useState({
     background: 1,
     header: 0,
   });
-
-  useEffect(() => {
-    setRandomNumber({
-      ...randomNumber,
-      background: Math.round(Math.random() * 2),
-    });
-    setRandomNumber({ ...randomNumber, header: Math.round(Math.random() * 2) });
-  }, []);
 
   function formatedDate(date) {
     const newDate = new Date(date.replace(/\s/, "T"));
@@ -207,4 +199,4 @@ export const getStaticProps: GetStaticProps = async (context) => {
   };
 };
 
-export default game;
+export default Game;
