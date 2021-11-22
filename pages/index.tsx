@@ -10,6 +10,7 @@ import { ICardsFetch } from "../interfaces";
 import SearchCarousel from "../components/SearchCarousel";
 import { ImRocket } from "react-icons/im";
 import { GrLinkTop } from "react-icons/gr";
+
 interface IHomeProps {
   release: ICardsFetch[];
   relevance: ICardsFetch[];

@@ -30,7 +30,7 @@ const Card = ({
   const router = useRouter()
 
   return (
-    <div className={`${styles.card} animate__animated animate__fadeIn`}>
+    <div className={`${styles.card} animate__animated animate__fadeIn`} onClick={() => router.push(`/game/${id}`)}>
       <Image
         src={thumbnail}
         alt="Game Thumbnail"

@@ -63,13 +63,12 @@
     }
   }
 
-  
-
   .intro {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
     gap: 70px;
+    max-width: 85vw;
 
     .search {
       flex: 1.25;
@@ -158,6 +157,11 @@
       gap: 30px;
       width: 100%;
 
+      @media screen and (max-width: 1336px) {
+        justify-items: center;
+        grid-template-columns: repeat(3, minmax(200px, 1fr));
+      }
+
       @media screen and (max-width: 768px) {
         justify-items: center;
         grid-template-columns: repeat(1, minmax(200px, 1fr));
@@ -177,7 +181,7 @@
     grid-template-columns: 1fr;
 
     width: 100%;
-    max-width: 80vw;
+    max-width: 85vw;
 
     h2 {
       color: var(--text-color);
@@ -188,6 +192,7 @@
 
   .carousel {
     margin-bottom: 20px;
+
     .card {
       cursor: grab;
 
