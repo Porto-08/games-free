@@ -19,10 +19,17 @@ interface IRandomNumber {
 
 const game = ({ game }: IGameProps) => {
   const [randomNumber, setRandomNumber] = useState<IRandomNumber>({
-    background: Math.round(Math.random() * 2),
-    header: Math.round(Math.random() * 2),
+    background: 1,
+    header: 0,
   });
 
+  useEffect(() => {
+    setRandomNumber({
+      ...randomNumber,
+      background: Math.round(Math.random() * 2),
+    });
+    setRandomNumber({ ...randomNumber, header: Math.round(Math.random() * 2) });
+  }, []);
 
   function formatedDate(date) {
     const newDate = new Date(date.replace(/\s/, "T"));
