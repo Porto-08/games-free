@@ -15,9 +15,10 @@ import Footer from "../components/Footer";
 interface IHomeProps {
   release: ICardsFetch[];
   relevance: ICardsFetch[];
+  filter: ICardsFetch[];
 }
 
-const Home = ({ release, relevance }: IHomeProps) => {
+const Home = ({ release, relevance, filter }: IHomeProps) => {
   const [form, setForm] = useState<string>("");
   const [error, setError] = useState<string>("");
   const [search, setSearch] = useState<ICardsFetch[]>([]);
@@ -32,7 +33,7 @@ const Home = ({ release, relevance }: IHomeProps) => {
     if (!form) setError("Please enter a search term");
 
     if (form) {
-      const title = release.filter((item: ICardsFetch) => {
+      const title = filter.filter((item: ICardsFetch) => {
         return item.title.toLowerCase().includes(form.toLowerCase());
       });
 
@@ -44,7 +45,7 @@ const Home = ({ release, relevance }: IHomeProps) => {
         return;
       }
 
-      const category = release.filter((item: ICardsFetch) => {
+      const category = filter.filter((item: ICardsFetch) => {
         return item.genre.toLowerCase().includes(form.toLowerCase());
       });
 
@@ -55,7 +56,7 @@ const Home = ({ release, relevance }: IHomeProps) => {
         return;
       }
 
-      const platform = release.filter((item: ICardsFetch) => {
+      const platform = filter.filter((item: ICardsFetch) => {
         return item.platform.toLowerCase().includes(form.toLowerCase());
       });
 
@@ -83,7 +84,7 @@ const Home = ({ release, relevance }: IHomeProps) => {
     setSearch([]);
     setForm("");
 
-    const genreFilter = release.filter((item: ICardsFetch) => {
+    const genreFilter = filter.filter((item: ICardsFetch) => {
       document.querySelector("#searchContainer")?.scrollIntoView();
       return item.genre.toLowerCase().includes(genre.toLowerCase());
     });
@@ -94,7 +95,7 @@ const Home = ({ release, relevance }: IHomeProps) => {
   const getGenres = () => {
     const arrayGenres: string[] = [];
 
-    release.forEach((item: ICardsFetch) => {
+    filter.forEach((item: ICardsFetch) => {
       item.genre
         .replace(" ", "")
         .split(",")
@@ -115,6 +116,8 @@ const Home = ({ release, relevance }: IHomeProps) => {
   useEffect(() => {
     setInformationsSearchs({ ...informationsSearchs, lastSearch: form });
   }, [search]);
+
+  
 
   return (
     <div className={`${styles.container} animate__animated animate__fadeIn`}>
@@ -150,7 +153,6 @@ const Home = ({ release, relevance }: IHomeProps) => {
           <li onClick={() => setCategory([])}>Home</li>
           <li onClick={() => filterGenres("Shooter")}>Shooter</li>
           <li onClick={() => filterGenres("Mmo")}>MMO</li>
-          <li onClick={() => filterGenres("Rpg")}>RPG</li>
           <li onClick={() => filterGenres("Strategy")}>Strategy</li>
         </ul>
       </header>
@@ -160,7 +162,8 @@ const Home = ({ release, relevance }: IHomeProps) => {
           <div>
             <h1>Games Free</h1>
             <p>
-              Here you have informations about free games to PC and Browsers. Free to Play forever!
+              Here you have informations about free games to PC and Browsers.
+              Free to Play forever!
             </p>
           </div>
 
@@ -256,6 +259,8 @@ export const getStaticProps: GetStaticProps = async () => {
     "https://www.freetogame.com/api/games?sort-by=relevance"
   );
 
+  
+
   const release = await axios.get<ICardsFetch[]>(
     "https://www.freetogame.com/api/games?sort-by=release-date"
   );
@@ -269,8 +274,9 @@ export const getStaticProps: GetStaticProps = async () => {
 
   return {
     props: {
-      relevance: relevance.data,
-      release: release.data,
+      relevance: relevance.data.slice(0, 50),
+      release: release.data.slice(0, 50),
+      filter: relevance.data,
     },
     revalidate: 60 * 60 * 48,
   };

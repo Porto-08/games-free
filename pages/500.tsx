@@ -6,7 +6,7 @@ import Link from "next/link"
 const Custom500 = () => {
   return (
     <div className={styles.container}>
-      <h1>Sorry, this page not exist or we have a internal server error. <Link href="/">Go back to home.</Link></h1>
+      <h1>Sorry, this page not exist or we have a internal server error. <Link href="/" >Go back to home.</Link></h1>
       <Image
         src={notFound}
         height={500}
