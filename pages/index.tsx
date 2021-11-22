@@ -17,7 +17,7 @@ interface IHomeProps {
   relevance: ICardsFetch[];
 }
 
-const Home = ({ release, relevance}: IHomeProps, ) => {  
+const Home = ({ release, relevance }: IHomeProps) => {
   const [form, setForm] = useState<string>("");
   const [error, setError] = useState<string>("");
   const [search, setSearch] = useState<ICardsFetch[]>([]);
@@ -160,12 +160,11 @@ const Home = ({ release, relevance}: IHomeProps, ) => {
           <div>
             <h1>Games Free</h1>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Reiciendis obcaecati blanditiis beatae.
+              Here you have informations about free games to PC and Browsers. Free to Play forever!
             </p>
           </div>
 
-          <form className={styles.searchBox}>
+          <div className={styles.searchBox}>
             <input
               type="text"
               name="search"
@@ -175,7 +174,7 @@ const Home = ({ release, relevance}: IHomeProps, ) => {
               list="genres"
             />
 
-            <datalist id="genres">
+            <datalist id="genres" className={styles.dataListGenres}>
               {genres.map((genre, index) => {
                 return <option key={index} value={genre} />;
               })}
@@ -184,7 +183,7 @@ const Home = ({ release, relevance}: IHomeProps, ) => {
             <button type="button" onClick={() => filterGames(form ?? "")}>
               <ImRocket />
             </button>
-          </form>
+          </div>
         </div>
 
         <div className={styles.illustration}>
@@ -260,7 +259,6 @@ export const getStaticProps: GetStaticProps = async () => {
   const release = await axios.get<ICardsFetch[]>(
     "https://www.freetogame.com/api/games?sort-by=release-date"
   );
-  
 
   if (!relevance.data || !release.data) {
     return {

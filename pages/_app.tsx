@@ -21,6 +21,10 @@ function MyApp({ Component, pageProps }: AppProps) {
       setScroll(window.scrollY);
     };
 
+    if (window.matchMedia("(max-width: 1920px)").matches) {
+      document.querySelector("datalist").style.display = "none";
+    }
+
     handleScroll();
 
     window.addEventListener("scroll", handleScroll);
