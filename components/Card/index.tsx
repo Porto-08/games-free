@@ -30,7 +30,7 @@ const Card = ({
   const router = useRouter()
 
   return (
-    <div className={`${styles.card} animate__animated animate__fadeIn`}>
+    <div className={`${styles.card} animate__animated animate__fadeIn`} onClick={screen.width < 768 ? () => router.push(`/game/${id}`) : null}>
       <Image
         src={thumbnail}
         alt="Game Thumbnail"
@@ -42,7 +42,7 @@ const Card = ({
         title={title}
       />
 
-      <section className={styles.cardDescription} onClick={() => router.push(`/game/${id}`)}>
+      <section className={styles.cardDescription}>
         <h4 title={title}>{title}</h4>
         <p title="Description">{short_description}</p>
 

@@ -19,8 +19,8 @@ interface IRandomNumber {
 
 const Game = ({ game }: IGameProps) => {
   const [randomNumber, setRandomNumber] = useState({
-    background: 1,
-    header: 0,
+    background: 0,
+    header: 1,
   });
 
   function formatedDate(date) {
@@ -43,7 +43,11 @@ const Game = ({ game }: IGameProps) => {
 
       <div
         style={{
-          background: `url(${game.screenshots[randomNumber.background].image}) no-repeat center center`,
+          background: `url(${
+            game.screenshots[randomNumber.background].image
+          }) no-repeat center center`,
+          backgroundSize: "100vw",
+          objectFit: "cover",
         }}
         className={`${styles.container} animate__animated animate__fadeIn`}
       >
@@ -54,14 +58,8 @@ const Game = ({ game }: IGameProps) => {
         </Link>
 
         <section className={styles.content}>
-          <Image
-            height={300}
-            width={1200}
-            src={
-              game.screenshots[randomNumber.header].image 
-            }
-            objectFit="cover"
-            // loading="eager"
+          <img
+            src={game.screenshots[randomNumber.header].image}
             alt="Game thumbnail"
           />
 
