@@ -195,6 +195,7 @@ const Home = ({ release, relevance, filter }: IHomeProps) => {
             height={500}
             width={500}
             alt="Boy play video-games"
+            priority
           />
         </div>
       </section>
@@ -268,7 +269,7 @@ export const getStaticProps: GetStaticProps = async () => {
   if (!relevance.data || !release.data) {
     return {
       notFound: true,
-      redirect: "/error",
+      redirect: "/404",
     };
   }
 

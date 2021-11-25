@@ -7,18 +7,6 @@
   --hover-color: #ed8d8d;
 }
 
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-    top: 40px;
-  }
-
-  100% {
-    opacity: 1;
-    top: 20px;
-  }
-}
-
 html,
 body {
   font-family: "Roboto", sans-serif;
@@ -93,8 +81,7 @@ a {
   }
 
   .content {
-    width: inherit;
-    height: inherit;
-    
+    width: 100%;
+    min-height: 100vh;
   }
 }

@@ -26,16 +26,23 @@ const Card = ({
   platform,
   filter,
 }: ICard) => {
-
-  const router = useRouter()
+  const router = useRouter();
 
   return (
-    <div className={`${styles.card} animate__animated animate__fadeIn`} onClick={screen.width < 900 ? () => router.push(`/game/${id}`) : null}>
-      <img
+    <div
+      className={`${styles.card} animate__animated animate__fadeIn`}
+      onClick={screen.width < 900 ? () => router.push(`/game/${id}`) : null}
+    >
+      <Image
         src={thumbnail}
+        sizes="50vw"
         alt="Game Thumbnail"
         draggable={false}
         title={title}
+        layout="responsive"
+        height={130}
+        width={200}
+        priority
       />
 
       <section className={styles.cardDescription}>
@@ -43,17 +50,30 @@ const Card = ({
         <p title="Description">{short_description}</p>
 
         <div className={styles.icons}>
-          <AiFillPlusCircle className={styles.icon} title="See about the game" onClick={() => router.push(`/game/${id}`)}/>
-
+          <AiFillPlusCircle
+            className={styles.icon}
+            title="See about the game"
+            onClick={() => router.push(`/game/${id}`)}
+          />
 
           <div>
             {platform == "PC (Windows)" ? (
-              <AiFillWindows className={styles.icon} title="Plataform" onClick={() => filter("PC (Windows)")}/>
+              <AiFillWindows
+                className={styles.icon}
+                title="Plataform"
+                onClick={() => filter("PC (Windows)")}
+              />
             ) : (
-              <AiFillChrome className={styles.icon} title="Plataform" onClick={() => filter("Web Browser")}/>
+              <AiFillChrome
+                className={styles.icon}
+                title="Plataform"
+                onClick={() => filter("Web Browser")}
+              />
             )}
 
-            <span title="Genre" onClick={() => filter(genre)} >{genre}</span>
+            <span title="Genre" onClick={() => filter(genre)}>
+              {genre}
+            </span>
           </div>
         </div>
       </section>
