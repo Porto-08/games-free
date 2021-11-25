@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 
 interface IGameProps {
   game: IGame;
+  similarGames: ICardsFetch[];
 }
 
 interface IRandomNumber {
@@ -17,7 +18,7 @@ interface IRandomNumber {
   header: number;
 }
 
-const Game = ({ game }: IGameProps) => {
+const Game = ({ game, similarGames }: IGameProps) => {
   const [randomNumber, setRandomNumber] = useState<IRandomNumber>({
     background: 0,
     header: 1,
@@ -186,13 +187,25 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async (context) => {
   const { id } = context.params;
 
-  const { data } = await axios.get(
+  const { data } = await axios.get<IGame>(
     `https://www.freetogame.com/api/game?id=${id}`
   );
+
+  const similarGames = await axios.get<ICardsFetch[]>(
+    `https://www.freetogame.com/api/games`
+  );
+
+  const removeSameGame = similarGames.data.filter((game) => {
+    return game.id !== data.id && game.genre === data.genre;
+  });
 
   return {
     props: {
       game: data,
+      similarGames: removeSameGame.splice(
+        Math.round(Math.random() * removeSameGame.length),
+        3
+      ),
     },
   };
 };
