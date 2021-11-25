@@ -90,6 +90,12 @@ const Home = ({ release, relevance, filter }: IHomeProps) => {
     });
 
     setCategory(genreFilter);
+
+    if (screen.width < 640 || screen.height < 480) {
+      window.scrollTo(0, 200);
+    } else {
+      window.scrollTo(0, 500);
+    }
   };
 
   const getGenres = () => {
@@ -150,7 +156,15 @@ const Home = ({ release, relevance, filter }: IHomeProps) => {
 
       <header>
         <ul className={styles.navBar}>
-          <li onClick={() => setCategory([])}>Home</li>
+          <li onClick={() => {
+            setCategory([]);
+
+            if (screen.width < 640 || screen.height < 480) {
+              window.scrollTo(0, 200);
+            } else {
+              window.scrollTo(0, 500);
+            }
+          }}>Home</li>
           <li onClick={() => filterGenres("Shooter")}>Shooter</li>
           <li onClick={() => filterGenres("Mmo")}>MMO</li>
           <li onClick={() => filterGenres("Strategy")}>Strategy</li>
