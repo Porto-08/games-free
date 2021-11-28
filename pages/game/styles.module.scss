@@ -153,9 +153,11 @@
       margin-top: 50px;
 
       div {
-        display: flex;
+        display: grid;
+        grid-template-columns: repeat(3, 400px);
         align-items: flex-end;
         justify-content: space-around;
+        gap: 10px;
         width: 100%;
 
         .game {
@@ -173,7 +175,15 @@
             color: var(--hover-color);
           }
         }
+
+        @media (max-width: 900px) {
+          grid-template-columns: 1fr;
+          justify-items: left;
+          gap: 20px;
+        }
       }
+
+      
     }
 
     @media (max-width: 1000px) {
