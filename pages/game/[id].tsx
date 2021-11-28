@@ -46,8 +46,8 @@ const Game = ({ game, similarGames }: IGameProps) => {
         style={{
           background: `url(${
             game.screenshots[randomNumber.background].image
-          }) no-repeat center center`,
-          backgroundSize: "100vw",
+          }) `,
+          backgroundSize: "100%",
           objectFit: "cover",
         }}
         className={`${styles.container} animate__animated animate__fadeIn`}
@@ -116,6 +116,24 @@ const Game = ({ game, similarGames }: IGameProps) => {
                   {game.minimum_system_requirements.graphics || "Graphics"}
                 </span>
               </section>
+            </section>
+
+            <section className={styles.recommended}>
+              <h2>Recommended</h2>
+
+              <div>
+                {similarGames.map((game: ICardsFetch) => {
+                  return (
+                    <div
+                      key={game.id}
+                      style={{ background: `url(${game.thumbnail}) no-repeat center center`, backgroundSize: "cover" }}
+                      className={styles.game}
+                    >
+                      <h4>{game.title}</h4>
+                    </div>
+                  );
+                })}
+              </div>
             </section>
           </div>
         </section>
