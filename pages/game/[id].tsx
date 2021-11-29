@@ -122,7 +122,7 @@ const Game = ({ game, similarGames }: IGameProps) => {
             </section>
 
             <section className={styles.recommended}>
-              <h2>Recommended</h2>
+              <h2>{similarGames.length > 0 ? "Recommended" : ""}</h2>
 
               <div>
                 {similarGames.map((game: ICardsFetch) => {
