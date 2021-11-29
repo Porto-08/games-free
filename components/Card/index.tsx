@@ -33,16 +33,11 @@ const Card = ({
       className={`${styles.card} animate__animated animate__fadeIn`}
       onClick={screen.width < 900 ? () => router.push(`/game/${id}`) : null}
     >
-      <Image
+      <img
         src={thumbnail}
-        sizes="50vw"
         alt="Game Thumbnail"
         draggable={false}
         title={title}
-        layout="responsive"
-        height={130}
-        width={200}
-        priority
       />
 
       <section className={styles.cardDescription}>

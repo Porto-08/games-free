@@ -35,7 +35,7 @@ const Game = ({ game, similarGames }: IGameProps) => {
   }
 
   return (
-    <>
+    <div style={{height: "100vh"}}>
       <Head>
         <title>
           {game.title} | {game.genre}
@@ -47,7 +47,7 @@ const Game = ({ game, similarGames }: IGameProps) => {
           background: `url(${
             game.screenshots[randomNumber.background].image
           }) no-repeat center center`,
-          backgroundSize: "100vw",
+          backgroundSize: "100%",
           objectFit: "cover",
         }}
         className={`${styles.container} animate__animated animate__fadeIn`}
@@ -120,7 +120,7 @@ const Game = ({ game, similarGames }: IGameProps) => {
           </div>
         </section>
       </div>
-    </>
+    </div>
   );
 };
 

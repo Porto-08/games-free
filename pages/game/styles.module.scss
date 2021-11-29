@@ -1,5 +1,9 @@
 .container {
-  height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: center;
+  justify-items: center;
+  height: 100%;
   width: 100vw;
 
   @media (max-width: 1000px) {
@@ -153,6 +157,24 @@
     @media (max-width: 1000px) {
       overflow: initial;
       border-radius: 0;
+    }
+  }
+
+  .suggests {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+    margin: 30px 0;
+
+    .game {
+      
+
+
+      img {
+        border-radius: 15px;
+        object-fit: cover;
+      }
     }
   }
 }

@@ -232,7 +232,7 @@ const Home = ({ release, relevance, filter }: IHomeProps) => {
           <h2>{informationsSearchs?.genre}</h2>
 
           <div className={styles.cardGrid}>
-            {category.map((item: ICardsFetch, index: number) => {
+            {category.map((item: ICardsFetch) => {
               return (
                 <Card
                   id={item.id}
