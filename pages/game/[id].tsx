@@ -2,11 +2,12 @@ import axios from "axios";
 import { GetStaticPaths, GetStaticProps } from "next";
 import styles from "./styles.module.scss";
 import { ICardsFetch, IGame } from "../../interfaces/index";
-import Image from "next/image";
 import Head from "next/head";
 import Link from "next/link";
 import { BiArrowBack } from "react-icons/bi";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useRouter } from "next/router";
+import {FiExternalLink} from "react-icons/fi"
 
 interface IGameProps {
   game: IGame;
@@ -23,6 +24,7 @@ const Game = ({ game, similarGames }: IGameProps) => {
     background: 0,
     header: 1,
   });
+  const router = useRouter();
 
   function formatedDate(date) {
     const newDate = new Date(date.replace(/\s/, "T"));
@@ -46,7 +48,7 @@ const Game = ({ game, similarGames }: IGameProps) => {
         style={{
           background: `url(${
             game.screenshots[randomNumber.background].image
-          }) no-repeat center center`,
+          }) `,
           backgroundSize: "100%",
           objectFit: "cover",
         }}
@@ -69,7 +71,7 @@ const Game = ({ game, similarGames }: IGameProps) => {
               <div>
                 <h1>{game.title || "Title Game"} - </h1>
                 <a href={game.game_url || "#"} target="_blank" rel="noreferrer">
-                  Visit Game
+                  Download <FiExternalLink />
                 </a>
               </div>
 
@@ -116,6 +118,28 @@ const Game = ({ game, similarGames }: IGameProps) => {
                   {game.minimum_system_requirements.graphics || "Graphics"}
                 </span>
               </section>
+            </section>
+
+            <section className={styles.recommended}>
+              <h2>Recommended</h2>
+
+              <div>
+                {similarGames.map((game: ICardsFetch) => {
+                  return (
+                    <div
+                      key={game.id}
+                      style={{
+                        background: `url(${game.thumbnail}) no-repeat center center`,
+                        backgroundSize: "cover",
+                      }}
+                      className={styles.game}
+                      onClick={() => router.push(`/game/${game.id}`)}
+                    >
+                      <h4>{game.title}</h4>
+                    </div>
+                  );
+                })}
+              </div>
             </section>
           </div>
         </section>

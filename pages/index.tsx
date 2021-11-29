@@ -166,7 +166,7 @@ const Home = ({ release, relevance, filter }: IHomeProps) => {
             }
           }}>Home</li>
           <li onClick={() => filterGenres("Shooter")}>Shooter</li>
-          <li onClick={() => filterGenres("Mmo")}>MMO</li>
+          <li onClick={() => filterGenres("MMO")}>MMO</li>
           <li onClick={() => filterGenres("Strategy")}>Strategy</li>
         </ul>
       </header>
