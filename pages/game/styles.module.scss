@@ -52,10 +52,13 @@
   }
 
   .contentText {
+    height: 100%;
     background: rgba(0, 0, 0, 0.9);
     backdrop-filter: blur(5px);
     padding: 20px;
     overflow: auto;
+
+    
 
     section {
       color: var(--text-color);
@@ -74,7 +77,7 @@
       }
 
       h1 {
-        font-size: clamp(1.75rem, 2.25vw, 2.5rem);
+        font-size: clamp(1.5rem, 2.25vw, 2.5rem);
         color: var(--hover-color);
       }
 
@@ -152,7 +155,7 @@
 
       div {
         display: grid;
-        grid-template-columns: repeat(3, 400px);
+        grid-template-columns: repeat(auto-fit, 400px);
         align-items: flex-end;
         justify-content: space-around;
         gap: 10px;
@@ -202,11 +205,6 @@
           gap: 20px;
         }
       }
-    }
-
-    @media (max-width: 1000px) {
-      overflow: initial;
-      border-radius: 0;
     }
   }
 }

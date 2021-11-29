@@ -69,7 +69,8 @@ const Game = ({ game, similarGames }: IGameProps) => {
           <div className={styles.contentText}>
             <section className={styles.introduction}>
               <div>
-                <h1>{game.title || "Title Game"} - </h1>
+                <h1>{game.title || "Title Game"}</h1>
+                <cite>-</cite>
                 <a href={game.game_url || "#"} target="_blank" rel="noreferrer">
                   Download <FiExternalLink />
                 </a>
@@ -228,7 +229,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
       game: data,
       similarGames: removeSameGame.splice(
         Math.round(Math.random() * removeSameGame.length),
-        3
+        4
       ),
     },
   };
