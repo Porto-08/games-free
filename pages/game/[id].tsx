@@ -7,7 +7,7 @@ import Link from "next/link";
 import { BiArrowBack } from "react-icons/bi";
 import { useState } from "react";
 import { useRouter } from "next/router";
-import {FiExternalLink} from "react-icons/fi"
+import { FiExternalLink } from "react-icons/fi";
 
 interface IGameProps {
   game: IGame;
@@ -37,11 +37,17 @@ const Game = ({ game, similarGames }: IGameProps) => {
   }
 
   return (
-    <div style={{height: "100vh"}}>
+    <div style={{ height: "100vh" }}>
       <Head>
         <title>
           {game.title} | {game.genre}
         </title>
+
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1217949519178812"
+          crossOrigin="anonymous"
+        ></script>
       </Head>
 
       <div

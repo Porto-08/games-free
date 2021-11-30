@@ -152,6 +152,12 @@ const Home = ({ release, relevance, filter }: IHomeProps) => {
         <meta property="og:image:alt" content="Valorant" />
         <meta property="og:image:width" content="400" />
         <meta property="og:image:height" content="400" />
+
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1217949519178812"
+          crossOrigin="anonymous"
+        ></script>
       </Head>
 
       <header>
