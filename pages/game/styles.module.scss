@@ -1,5 +1,4 @@
 .container {
-  height: 100%;
   width: 100%;
 
   .backToHome {
@@ -155,7 +154,7 @@
         grid-template-columns: repeat(auto-fit, 400px);
         align-items: flex-end;
         justify-content: space-around;
-        gap: 10px;
+        gap: 20px;
         width: 100%;
 
         .game {
