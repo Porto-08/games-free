@@ -37,6 +37,7 @@ const Card = ({
         src={thumbnail}
         alt="Game Thumbnail"
         draggable={false}
+        
         title={title}
       />
 

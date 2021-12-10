@@ -40,11 +40,6 @@ function MyApp({ Component, pageProps }: AppProps) {
           rel="stylesheet"
         />
         <link rel="stylesheet" type="text/css" href="/nprogress.css" />
-        <script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1217949519178812"
-          crossOrigin="anonymous"
-        ></script>
       </Head>
 
       <div className="container">

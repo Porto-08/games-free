@@ -123,8 +123,6 @@ const Home = ({ release, relevance, filter }: IHomeProps) => {
     setInformationsSearchs({ ...informationsSearchs, lastSearch: form });
   }, [search]);
 
-  
-
   return (
     <div className={`${styles.container} animate__animated animate__fadeIn`}>
       <Head>
@@ -162,15 +160,19 @@ const Home = ({ release, relevance, filter }: IHomeProps) => {
 
       <header>
         <ul className={styles.navBar}>
-          <li onClick={() => {
-            setCategory([]);
+          <li
+            onClick={() => {
+              setCategory([]);
 
-            if (screen.width < 640 || screen.height < 480) {
-              window.scrollTo(0, 200);
-            } else {
-              window.scrollTo(0, 500);
-            }
-          }}>Home</li>
+              if (screen.width < 640 || screen.height < 480) {
+                window.scrollTo(0, 200);
+              } else {
+                window.scrollTo(0, 500);
+              }
+            }}
+          >
+            Home
+          </li>
           <li onClick={() => filterGenres("Shooter")}>Shooter</li>
           <li onClick={() => filterGenres("MMO")}>MMO</li>
           <li onClick={() => filterGenres("Strategy")}>Strategy</li>
@@ -279,8 +281,6 @@ export const getStaticProps: GetStaticProps = async () => {
   const relevance = await axios.get<ICardsFetch[]>(
     "https://www.freetogame.com/api/games?sort-by=relevance"
   );
-
-  
 
   const release = await axios.get<ICardsFetch[]>(
     "https://www.freetogame.com/api/games?sort-by=release-date"
