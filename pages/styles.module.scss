@@ -162,7 +162,12 @@
         grid-template-columns: repeat(3, minmax(200px, 1fr));
       }
 
-      @media screen and (max-width: 768px) {
+      @media screen and (max-width: 900px) {
+        justify-items: center;
+        grid-template-columns: repeat(2, minmax(200px, 1fr));
+      }
+
+      @media screen and (max-width: 700px) {
         justify-items: center;
         grid-template-columns: repeat(1, minmax(200px, 1fr));
       }

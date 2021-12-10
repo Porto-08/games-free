@@ -22,12 +22,12 @@ const SearchCarousel = ({ data, filter }: ISearchCarouselProps) => {
       partialVisibilityGutter: 40,
     },
     tablet: {
-      breakpoint: { max: 1024, min: 999 },
+      breakpoint: { max: 1024, min: 769 },
       items: 2,
       partialVisibilityGutter: 40,
     },
     mobile: {
-      breakpoint: { max: 998, min: 0 },
+      breakpoint: { max: 768, min: 0 },
       items: 1,
       partialVisibilityGutter: 40,
     },
