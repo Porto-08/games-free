@@ -19,6 +19,7 @@ const Custom500 = () => {
         Sorry, we have a internal server error.{" "}
         <Link href="/"> Lets go back to home.</Link>
       </h1>
+      
       <Image src={notFound} height={500} width={500} alt="Not Found" />
     </div>
   );

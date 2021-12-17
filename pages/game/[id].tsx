@@ -5,9 +5,10 @@ import { ICardsFetch, IGame } from "../../interfaces/index";
 import Head from "next/head";
 import Link from "next/link";
 import { BiArrowBack } from "react-icons/bi";
-import { useEffect, useState } from "react";
+import { Context, ContextType, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { FiExternalLink } from "react-icons/fi";
+import { ParsedUrlQuery } from "querystring";
 
 interface IGameProps {
   game: IGame;
@@ -19,6 +20,10 @@ interface IRandomNumber {
   header: number;
 }
 
+interface IParams extends ParsedUrlQuery {
+  id: string;
+}
+
 const Game = ({ game, similarGames }: IGameProps) => {
   const [randomNumber, setRandomNumber] = useState<IRandomNumber>({
     background: 0,
@@ -27,7 +32,7 @@ const Game = ({ game, similarGames }: IGameProps) => {
   const router = useRouter();
   const [loading, setLoading] = useState<boolean>(true);
 
-  function formatedDate(date) {
+  function formatedDate(date: string) {
     const newDate = new Date(date.replace(/\s/, "T"));
 
     const dateFormated = `${newDate.getFullYear()}/${newDate.getDate() + 1}/${
@@ -231,7 +236,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  const { id } = context.params;
+  const { id } = context.params as IParams;
 
   const { data } = await axios.get<IGame>(
     `https://www.freetogame.com/api/game?id=${id}`
