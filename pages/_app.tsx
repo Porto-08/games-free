@@ -7,6 +7,8 @@ import { useEffect, useState } from "react";
 import Router from "next/router";
 import NProgress from "nprogress";
 import "animate.css";
+import 'react-toastify/dist/ReactToastify.css';
+
 
 // Loading das paginas.
 Router.events.on("routeChangeStart", () => NProgress.start());

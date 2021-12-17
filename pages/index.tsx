@@ -9,8 +9,9 @@ import { useEffect, useState } from "react";
 import { ICardsFetch } from "../interfaces";
 import SearchCarousel from "../components/SearchCarousel";
 import { ImRocket } from "react-icons/im";
-import { GrLinkTop } from "react-icons/gr";
+import { ToastContainer, toast } from "react-toastify";
 import Footer from "../components/Footer";
+
 
 interface IHomeProps {
   release: ICardsFetch[];
@@ -30,7 +31,11 @@ const Home = ({ release, relevance, filter }: IHomeProps) => {
     setForm(form);
     setCategory([]);
 
-    if (!form) setError("Please enter a search term");
+    if (!form)
+      toast.error("Please enter a game/category name", {
+        theme: "dark",
+        pauseOnHover: true,
+      });
 
     if (form) {
       const title = filter.filter((item: ICardsFetch) => {
@@ -71,11 +76,7 @@ const Home = ({ release, relevance, filter }: IHomeProps) => {
       setError(`Not results found for: "${form}". :(`);
       setSearch([]);
 
-      if (screen.width < 640 || screen.height < 480) {
-        window.scrollTo(0, 200);
-      } else {
-        window.scrollTo(0, 500);
-      }
+      window.location.href = "#searchContainer";
     }
   };
 
@@ -85,7 +86,6 @@ const Home = ({ release, relevance, filter }: IHomeProps) => {
     setForm("");
 
     const genreFilter = filter.filter((item: ICardsFetch) => {
-      document.querySelector("#searchContainer")?.scrollIntoView();
       return item.genre.toLowerCase().includes(genre.toLowerCase());
     });
 
@@ -159,6 +159,7 @@ const Home = ({ release, relevance, filter }: IHomeProps) => {
       </Head>
 
       <header>
+        <ToastContainer />
         <ul className={styles.navBar}>
           <li
             onClick={() => {
@@ -236,7 +237,7 @@ const Home = ({ release, relevance, filter }: IHomeProps) => {
       )}
 
       {category && category.length > 0 ? (
-        <section className={styles.category}>
+        <section className={styles.category} id="filteredGames">
           <h2>{informationsSearchs?.genre}</h2>
 
           <div className={styles.cardGrid}>
@@ -262,7 +263,7 @@ const Home = ({ release, relevance, filter }: IHomeProps) => {
           </div>
         </section>
       ) : (
-        <section className={styles.content}>
+        <section className={styles.content} id="content">
           <h2>Popular</h2>
 
           <SearchCarousel data={relevance} filter={filterGames} />
