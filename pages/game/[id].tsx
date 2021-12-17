@@ -71,7 +71,7 @@ const Game = ({ game, similarGames }: IGameProps) => {
             backgroundSize: "100%",
             objectFit: "cover",
           }}
-          className={`${styles.container} animate__animated animate__fadeIn`}
+          className={`${styles.container} fadeInUp`}
         >
           <Link href="/">
             <span className={styles.backToHome}>

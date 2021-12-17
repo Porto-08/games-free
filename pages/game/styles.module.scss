@@ -1,5 +1,6 @@
 .container {
   width: 100%;
+  
 
   .backToHome {
     display: flex;
@@ -151,7 +152,7 @@
 
       div {
         display: grid;
-        grid-template-columns: repeat(3, 400px);
+        grid-template-columns: repeat(auto-fit, 400px);
         align-items: flex-end;
         justify-content: space-between;
         gap: 10px;
@@ -204,3 +205,4 @@
     }
   }
 }
+

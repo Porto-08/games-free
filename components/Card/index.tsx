@@ -30,7 +30,7 @@ const Card = ({
 
   return (
     <div
-      className={`${styles.card} animate__animated animate__fadeIn`}
+      className={`${styles.card}`}
       onClick={screen.width < 900 ? () => router.push(`/game/${id}`) : undefined}
     >
       <img

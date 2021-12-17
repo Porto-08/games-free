@@ -6,7 +6,6 @@ import { BiArrowFromBottom } from "react-icons/bi";
 import { useEffect, useState } from "react";
 import Router from "next/router";
 import NProgress from "nprogress";
-import "animate.css";
 import 'react-toastify/dist/ReactToastify.css';
 
 

@@ -5,13 +5,12 @@ import styles from "./styles.module.scss";
 import gamesIllustration from "../assets/svg/games.svg";
 import Card from "../components/Card";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { ICardsFetch } from "../interfaces";
 import SearchCarousel from "../components/SearchCarousel";
 import { ImRocket } from "react-icons/im";
 import { ToastContainer, toast } from "react-toastify";
 import Footer from "../components/Footer";
-
 
 interface IHomeProps {
   release: ICardsFetch[];
@@ -27,7 +26,9 @@ const Home = ({ release, relevance, filter }: IHomeProps) => {
   const [category, setCategory] = useState<ICardsFetch[]>([]);
   const [informationsSearchs, setInformationsSearchs] = useState<any>();
 
-  const filterGames = (form: string) => {
+  const filterGames = (form: string, event?: FormEvent<HTMLFormElement>) => {
+    event?.preventDefault();
+    
     setForm(form);
     setCategory([]);
 
@@ -123,8 +124,10 @@ const Home = ({ release, relevance, filter }: IHomeProps) => {
     setInformationsSearchs({ ...informationsSearchs, lastSearch: form });
   }, [search]);
 
+  function handleKeyDown(event: any) {}
+
   return (
-    <div className={`${styles.container} animate__animated animate__fadeIn`}>
+    <div className={`${styles.container} fadeInUp`}>
       <Head>
         <title>Games Free</title>
         <meta
@@ -160,6 +163,7 @@ const Home = ({ release, relevance, filter }: IHomeProps) => {
 
       <header>
         <ToastContainer />
+
         <ul className={styles.navBar}>
           <li
             onClick={() => {
@@ -191,24 +195,26 @@ const Home = ({ release, relevance, filter }: IHomeProps) => {
           </div>
 
           <div className={styles.searchBox}>
-            <input
-              type="text"
-              name="search"
-              id="search"
-              placeholder="Search about game or category"
-              onChange={(e) => setForm(e.target.value)}
-              list="genres"
-            />
+            <form onSubmit={(event) => filterGames(form, event)}>
+              <input
+                type="text"
+                name="search"
+                id="search"
+                placeholder="Search about game or category"
+                onChange={(e) => setForm(e.target.value)}
+                list="genres"
+              />
 
-            <datalist id="genres" className={styles.dataListGenres}>
-              {genres.map((genre, index) => {
-                return <option key={index} value={genre} />;
-              })}
-            </datalist>
+              <datalist id="genres" className={styles.dataListGenres}>
+                {genres.map((genre, index) => {
+                  return <option key={index} value={genre} />;
+                })}
+              </datalist>
 
-            <button type="button" onClick={() => filterGames(form ?? "")}>
-              <ImRocket />
-            </button>
+              <button type="submit" onClick={() => filterGames(form)}>
+                <ImRocket />
+              </button>
+            </form>
           </div>
         </div>
 
