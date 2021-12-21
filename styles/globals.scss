@@ -19,6 +19,7 @@ body {
 body::-webkit-scrollbar {
   width: 10px;
   height: 0; /* width of the entire scrollbar */
+ 
 }
 
 body::-webkit-scrollbar-track {
@@ -41,6 +42,15 @@ a {
   margin: 0;
   outline: none;
   box-sizing: border-box;
+}
+
+.pageLoading {
+  position: absolute;
+  inset: 0;
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .container {
@@ -84,6 +94,8 @@ a {
     width: 100%;
     min-height: 100vh;
   }
+
+  
 }
 
 @keyframes fadeInUp {
@@ -100,3 +112,4 @@ a {
 .fadeInUp {
   animation: fadeInUp 1s ease;
 }
+

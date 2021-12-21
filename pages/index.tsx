@@ -28,17 +28,21 @@ const Home = ({ release, relevance, filter }: IHomeProps) => {
 
   const filterGames = (form: string, event?: FormEvent<HTMLFormElement>) => {
     event?.preventDefault();
-    
-    setForm(form);
+
     setCategory([]);
 
-    if (!form)
+    if (form === "") {
       toast.error("Please enter a game/category name", {
         theme: "dark",
         pauseOnHover: true,
       });
 
+      return;
+    }
+
     if (form) {
+      console.log(form);
+      
       const title = filter.filter((item: ICardsFetch) => {
         return item.title.toLowerCase().includes(form.toLowerCase());
       });
@@ -124,8 +128,6 @@ const Home = ({ release, relevance, filter }: IHomeProps) => {
     setInformationsSearchs({ ...informationsSearchs, lastSearch: form });
   }, [search]);
 
-  function handleKeyDown(event: any) {}
-
   return (
     <div className={`${styles.container} fadeInUp`}>
       <Head>
@@ -162,8 +164,6 @@ const Home = ({ release, relevance, filter }: IHomeProps) => {
       </Head>
 
       <header>
-        <ToastContainer />
-
         <ul className={styles.navBar}>
           <li
             onClick={() => {
@@ -183,6 +183,8 @@ const Home = ({ release, relevance, filter }: IHomeProps) => {
           <li onClick={() => filterGenres("Strategy")}>Strategy</li>
         </ul>
       </header>
+
+      <ToastContainer />
 
       <section className={styles.intro}>
         <div className={styles.search}>
@@ -211,7 +213,7 @@ const Home = ({ release, relevance, filter }: IHomeProps) => {
                 })}
               </datalist>
 
-              <button type="submit" onClick={() => filterGames(form)}>
+              <button type="submit">
                 <ImRocket />
               </button>
             </form>
