@@ -27,6 +27,7 @@ const Home = ({ release, relevance, filter }: IHomeProps) => {
   const [informationsSearchs, setInformationsSearchs] = useState<any>();
 
   const filterGames = (form: string, event?: FormEvent<HTMLFormElement>) => {
+    setInformationsSearchs({ ...informationsSearchs, lastSearch: form });
     event?.preventDefault();
 
     setCategory([]);
@@ -123,10 +124,6 @@ const Home = ({ release, relevance, filter }: IHomeProps) => {
   useEffect(() => {
     getGenres();
   }, []);
-
-  useEffect(() => {
-    setInformationsSearchs({ ...informationsSearchs, lastSearch: form });
-  }, [search]);
 
   return (
     <div className={`${styles.container} fadeInUp`}>
