@@ -152,9 +152,9 @@ const Game = ({ game, similarGames }: IGameProps) => {
                 <div className={styles.recommendedContainer}>
                   {similarGames.map((game: ICardsFetch) => {
                     return (
-                      <a href={`/game/${game.id}`}>
+                      <a href={`/game/${game.id}`} key={game.id}>
                         <div
-                          key={game.id}
+                          
                           style={{
                             background: `url(${game.thumbnail}) no-repeat center center`,
                             backgroundSize: "cover",
