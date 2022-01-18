@@ -11,6 +11,20 @@ export interface ICardsFetch {
   release_date: string;
   freetogame_profile_url: string;
 }
+export interface ICard {
+  id: number;
+  title: string;
+  thumbnail: string;
+  short_description: string;
+  game_url: string;
+  genre: string;
+  platform: string;
+  publisher: string;
+  developer: string;
+  release_date: string;
+  freetogame_profile_url: string;
+  filter: (form: string) => void;
+}
 
 interface ISystemRequirements {
   os: string;

@@ -2,21 +2,7 @@ import styles from "./styles.module.scss";
 import Image from "next/image";
 import { AiFillPlusCircle, AiFillChrome, AiFillWindows } from "react-icons/ai";
 import { useRouter } from "next/dist/client/router";
-interface ICard {
-  id: number;
-  title: string;
-  thumbnail: string;
-  short_description: string;
-  game_url: string;
-  genre: string;
-  platform: string;
-  publisher: string;
-  developer: string;
-  release_date: string;
-  freetogame_profile_url: string;
-  filter: (form: string) => void;
-}
-
+import { ICard } from "interfaces";
 const Card = ({
   thumbnail,
   id,
@@ -31,7 +17,6 @@ const Card = ({
   return (
     <div
       className={`${styles.card}`}
-      onClick={screen.width < 900 ? () => router.push(`/game/${id}`) : undefined}
     >
       <img
         src={thumbnail}
@@ -50,24 +35,27 @@ const Card = ({
             className={styles.icon}
             title="See about the game"
             onClick={() => router.push(`/game/${id}`)}
+            role="figure"
           />
 
           <div>
-            {platform == "PC (Windows)" ? (
+            {platform === "PC (Windows)" ? (
               <AiFillWindows
                 className={styles.icon}
                 title="Plataform"
                 onClick={() => filter("PC (Windows)")}
+                role="figure"
               />
             ) : (
               <AiFillChrome
                 className={styles.icon}
                 title="Plataform"
                 onClick={() => filter("Web Browser")}
+                role="figure"
               />
             )}
 
-            <span title="Genre" onClick={() => filter(genre)}>
+            <span title="Genre" role="button" onClick={() => filter(genre)}>
               {genre}
             </span>
           </div>
