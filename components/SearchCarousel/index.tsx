@@ -5,8 +5,8 @@ import styles from "../../pages/styles.module.scss";
 import { ICardsFetch } from "../../interfaces";
 
 interface ISearchCarouselProps {
-    data: ICardsFetch[];
-    filter: (form: string) => void;
+  data: ICardsFetch[];
+  filter: (form: string) => void;
 }
 
 const SearchCarousel = ({ data, filter }: ISearchCarouselProps) => {

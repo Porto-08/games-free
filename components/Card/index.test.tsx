@@ -2,7 +2,7 @@ import Card from ".";
 import { render, screen, fireEvent } from "../../test/index";
 import { ICard } from "interfaces";
 
-const mook: ICard = {
+const mock: ICard = {
   title: "Title",
   short_description: "Short description",
   developer: "Developer",
@@ -19,25 +19,25 @@ const mook: ICard = {
 
 describe("Card", () => {
   it("should render a Card with mock data", () => {
-    render(<Card {...mook} />);
+    render(<Card {...mock} />);
 
     expect(screen.getByRole("img")).toBeInTheDocument();
     expect(screen.getByRole("heading")).toBeInTheDocument();
-    expect(screen.getByText(mook.short_description)).toBeInTheDocument();
+    expect(screen.getByText(mock.short_description)).toBeInTheDocument();
 
     const svgs = screen.getAllByRole("figure");
     svgs.forEach((svg) => expect(svg).toBeInTheDocument());
 
-    expect(screen.getByText(mook.genre)).toBeInTheDocument();
+    expect(screen.getByText(mock.genre)).toBeInTheDocument();
   });
 
   it("should call filter function when clicking on genre", () => {
-    render(<Card {...mook} />);
+    render(<Card {...mock} />);
 
-    const genre = screen.getByText(mook.genre);
+    const genre = screen.getByText(mock.genre);
     expect(genre).toBeInTheDocument();
 
     fireEvent.click(genre);
-    expect(mook.filter).toHaveBeenCalledWith(mook.genre);
+    expect(mock.filter).toHaveBeenCalledWith(mock.genre);
   });
 });
