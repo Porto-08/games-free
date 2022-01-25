@@ -19,8 +19,6 @@ Senti que precisava produzir algo útil e também estudar NextJs, assim surgiu o
 
 ## Instalação do Projeto
 - yarn 
-- yarn start
-
 ## Rodar Projeto
 - yarn dev
 
