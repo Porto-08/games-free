@@ -7,6 +7,8 @@ import Router from "next/router";
 import NProgress from "nprogress";
 import "react-toastify/dist/ReactToastify.css";
 import { ClipLoader, RingLoader } from "react-spinners";
+import { useScroll } from "hooks/useScroll";
+import { useLoadingPage } from "hooks/useLoading";
 
 // Loading das paginas.
 Router.events.on("routeChangeStart", () => NProgress.start());
@@ -14,32 +16,8 @@ Router.events.on("routeChangeComplete", () => NProgress.done());
 Router.events.on("routeChangeError", () => NProgress.done());
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const [scroll, setScroll] = useState<number>(0);
-  const [loadding, setLoading] = useState<boolean>(true);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScroll(window.scrollY);
-    };
-
-    const handleLoad = () => {
-      setLoading(false);
-    };
-
-    handleScroll();
-
-    window.addEventListener("scroll", handleScroll);
-
-    window.addEventListener("load", (event) => {
-      handleLoad();
-    });
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("load", handleLoad);
-    };
-    
-  }, []);
+  const { scroll } = useScroll();
+  const { loading } = useLoadingPage();
 
   return (
     <>
@@ -53,7 +31,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <link rel="stylesheet" type="text/css" href="/nprogress.css" />
       </Head>
 
-      {loadding === true ? (
+      {loading === true ? (
         <div className="pageLoading">
           <RingLoader color="#14ffec" size={200} />
         </div>
