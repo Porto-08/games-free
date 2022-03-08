@@ -3,12 +3,11 @@ import { GetStaticPaths, GetStaticProps } from "next";
 import styles from "./styles.module.scss";
 import { ICardsFetch, IGame } from "../../interfaces/index";
 import Head from "next/head";
-import Link from "next/link";
 import { BiArrowBack } from "react-icons/bi";
-import { Context, ContextType, useEffect, useState } from "react";
-import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import { FiExternalLink } from "react-icons/fi";
 import { ParsedUrlQuery } from "querystring";
+
 
 interface IGameProps {
   game: IGame;
@@ -29,15 +28,13 @@ const Game = ({ game, similarGames }: IGameProps) => {
     background: 0,
     header: 1,
   });
-  const router = useRouter();
   const [loading, setLoading] = useState<boolean>(true);
 
   function formatedDate(date: string) {
     const newDate = new Date(date.replace(/\s/, "T"));
 
-    const dateFormated = `${newDate.getFullYear()}/${newDate.getDate() + 1}/${
-      newDate.getMonth() + 1
-    }`;
+    const dateFormated = `${newDate.getFullYear()}/${newDate.getDate() + 1}/${newDate.getMonth() + 1
+      }`;
 
     return dateFormated;
   }
@@ -65,19 +62,20 @@ const Game = ({ game, similarGames }: IGameProps) => {
       ) : (
         <div
           style={{
-            background: `url(${
-              game.screenshots[randomNumber.background].image
-            }) `,
+            background: `url(${game.screenshots[randomNumber.background].image
+              }) `,
             backgroundSize: "100%",
             objectFit: "cover",
           }}
           className={`${styles.container} fadeInUp`}
         >
-          <Link href="/">
-            <span className={styles.backToHome}>
-              <BiArrowBack />
-            </span>
-          </Link>
+
+          <span className={styles.backToHome} onClick={() => {
+            window.history.back();
+          }}>
+            <BiArrowBack />
+          </span>
+
 
           <section className={styles.content}>
             <img
@@ -115,36 +113,38 @@ const Game = ({ game, similarGames }: IGameProps) => {
                 <p>{game.description || "Description"}</p>
               </section>
 
-              <section className={styles.requirements}>
-                <section>
-                  <h2>Os</h2>
-                  <span>
-                    {game.minimum_system_requirements.os || "Windows"}
-                  </span>
+              {game.minimum_system_requirements && (
+                <section className={styles.requirements}>
+                  <section>
+                    <h2>Os</h2>
+                    <span>
+                      {game.minimum_system_requirements.os || "Windows"}
+                    </span>
 
-                  <h2>Memory</h2>
-                  <span>
-                    {game.minimum_system_requirements.memory || "Memory Ram"}
-                  </span>
+                    <h2>Memory</h2>
+                    <span>
+                      {game.minimum_system_requirements.memory || "Memory Ram"}
+                    </span>
 
-                  <h2>Storage</h2>
-                  <span>
-                    {game.minimum_system_requirements.storage || "Storage"}
-                  </span>
+                    <h2>Storage</h2>
+                    <span>
+                      {game.minimum_system_requirements.storage || "Storage"}
+                    </span>
+                  </section>
+
+                  <section>
+                    <h2>Processor</h2>
+                    <span>
+                      {game.minimum_system_requirements.processor || "Processor"}
+                    </span>
+
+                    <h2>Graphics</h2>
+                    <span>
+                      {game.minimum_system_requirements.graphics || "Graphics"}
+                    </span>
+                  </section>
                 </section>
-
-                <section>
-                  <h2>Processor</h2>
-                  <span>
-                    {game.minimum_system_requirements.processor || "Processor"}
-                  </span>
-
-                  <h2>Graphics</h2>
-                  <span>
-                    {game.minimum_system_requirements.graphics || "Graphics"}
-                  </span>
-                </section>
-              </section>
+              )}
 
               <section className={styles.recommended}>
                 <h2>{similarGames.length > 0 ? "Recommended" : ""}</h2>
@@ -154,7 +154,7 @@ const Game = ({ game, similarGames }: IGameProps) => {
                     return (
                       <a href={`/game/${game.id}`} key={game.id}>
                         <div
-                          
+
                           style={{
                             background: `url(${game.thumbnail}) no-repeat center center`,
                             backgroundSize: "cover",
