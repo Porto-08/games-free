@@ -11,6 +11,8 @@ import SearchCarousel from "../components/SearchCarousel";
 import { ImRocket } from "react-icons/im";
 import { ToastContainer, toast } from "react-toastify";
 import Footer from "../components/Footer";
+import { BiArrowBack } from "react-icons/bi";
+import { BsArrowRight } from "react-icons/bs";
 
 interface IHomeProps {
   release: ICardsFetch[];
@@ -43,7 +45,7 @@ const Home = ({ release, relevance, filter }: IHomeProps) => {
 
     if (form) {
       console.log(form);
-      
+
       const title = filter.filter((item: ICardsFetch) => {
         return item.title.toLowerCase().includes(form.toLowerCase());
       });
@@ -230,7 +232,16 @@ const Home = ({ release, relevance, filter }: IHomeProps) => {
 
       {search && search.length > 0 && (
         <section id="searchContainer" className={styles.searchContent}>
-          <h2>Search result for: {informationsSearchs?.lastSearch}.</h2>
+
+          <div className={styles.titleBox}>
+            <h2 className="fadeInUp">
+              This is our games for: <span>{informationsSearchs?.lastSearch}</span>
+            </h2>
+            <span className={styles.arrow}>
+              <BsArrowRight />
+            </span>
+          </div>
+
           <SearchCarousel data={search} filter={filterGames} />
         </section>
       )}

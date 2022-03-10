@@ -192,6 +192,24 @@
       color: var(--text-color);
       font-size: 2rem;
       font-size: clamp(2rem, 2.5vw, 2.5rem);
+
+      span {
+        color: var(--secondary-color);
+        text-decoration: underline;
+        font-weight: bold;
+      }
+    }
+  }
+
+  .titleBox {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .arrow {
+      font-size: clamp(1.5rem, 1.75vw, 1.75rem);
+      color: var(--secondary-color);
+      animation: arrowAnimation 0.5s ease-in 0s infinite alternate;
     }
   }
 
@@ -206,5 +224,15 @@
         margin: 0 15px 0 0;
       }
     }
+  }
+}
+
+@keyframes arrowAnimation {
+  from {
+    transform: translateX(-10px);
+  }
+
+  to {
+    transform: translateX(0);
   }
 }

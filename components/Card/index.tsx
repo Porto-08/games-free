@@ -16,7 +16,7 @@ const Card = ({
 
   return (
     <div
-      className={`${styles.card}`}
+      className={`${styles.card} fadeInUp`}
     >
       <img
         src={thumbnail}
